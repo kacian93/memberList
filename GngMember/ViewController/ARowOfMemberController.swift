@@ -1,19 +1,14 @@
 //
-//  ViewController.swift
+//  ARowOfMemberController.swift
 //  GngMember
 //
 //  Created by PC156 on 2022/09/05.
 //
 
+import Foundation
 import UIKit
-
-class ViewController: UIViewController {
-
+class ARowOfMemberController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
-
