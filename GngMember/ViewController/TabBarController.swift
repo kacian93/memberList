@@ -4,47 +4,54 @@
 //
 //  Created by PC156 on 2022/09/05.
 //
-
 import Foundation
 import UIKit
-class TabBarController : UIViewController, UITabBarDelegate{
+class TabBarController : UITabBarController{
     
     @IBOutlet var myTabBar: UITabBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        myTabBar = UITabBar()
-        myTabBar.frame = CGRect(x: 0, y: view.frame.height-50, width: view.frame.width, height: 50)
-        myTabBar.barTintColor = .tertiaryLabel
-        myTabBar.tintColor = .white
-
-        let memberlist : UITabBarItem = UITabBarItem(title: "社員一覧", image: .none, selectedImage: .none)
-        memberlist.tag = 1
-        let addMember : UITabBarItem = UITabBarItem(title: "入力画面", image: .none, selectedImage: .none)
-        addMember.tag = 2
-        let webkit : UITabBarItem = UITabBarItem(title: "webkit", image: .none, selectedImage: .none)
-        webkit.tag = 3
-        myTabBar.items = [memberlist,addMember,webkit]
-        myTabBar.delegate = self
-
-        self.view.addSubview(myTabBar)
+//        myTabBar = UITabBar()
+//        myTabBar.frame = CGRect(x: 0, y: view.frame.height-50, width: view.frame.width, height: 50)
+//        myTabBar.barTintColor = .tertiaryLabel
+//        myTabBar.tintColor = .white
+//
+//        let memberlist = MemberListController()
+//        memberlist.tabBarItem = UITabBarItem(title: "社員一覧", image: .none, selectedImage: .none)
+//        memberlist.tabBarItem.tag = 1
+//        
+//        let addMember = JoinMemberController()
+//        addMember.tabBarItem = UITabBarItem(title: "入力画面", image: .none, selectedImage: .none)
+//        addMember.tabBarItem.tag = 2
+//        
+//        let webkit = GngsWebsiteController()
+//        webkit.tabBarItem = UITabBarItem(title: "webkit", image: .none, selectedImage: .none)
+//        webkit.tabBarItem.tag = 3
+//        
+//        myTabBar.setItems([memberlist.tabBarItem, addMember.tabBarItem, webkit.tabBarItem], animated: true)
+//        myTabBar.delegate = self
+//        viewControllers = [memberlist, addMember, webkit]
+//        
+//        
+//        self.view.addSubview(myTabBar)
+//        self.myTabBar.delegate = self
+//        
     }
-
-    func tabar(_ tabbar: UITabBar, didselect item: UITabBarItem){
-        switch item.tag{
-        case 1:
-            print(1)
-
-            let storyboard : UIStoryboard = self.storyboard!
-            let memberlistView = storyboard.instantiateViewController(withIdentifier: "memberList")
-            memberlistView.modalPresentationStyle = .fullScreen
-                present(memberlistView, animated: true)
-        case 2:
-            print(2)
-        default :
-            return
-        }
-    }
+//    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//
+//            switch item.tag{
+//            case 1:
+//                print(1)
+//
+//                let storyboard : UIStoryboard = self.storyboard!
+//                let memberlistView = storyboard.instantiateViewController(withIdentifier: "MemberListController")
+//                memberlistView.modalPresentationStyle = .fullScreen
+//                self.present(memberlistView, animated: true)
+//            case 2:
+//                print(2)
+//            default :
+//                return
+//            }
+//        }
 
 }

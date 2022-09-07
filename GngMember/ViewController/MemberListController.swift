@@ -10,7 +10,6 @@ import UIKit
 class MemberListController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     var csvMember : [Member] = CSVLoad().loadCSV(filename: "GngsMember")
-    
     @IBOutlet var tableTitle: UITableViewCell!
     
     @IBOutlet var tableView: UITableView!
