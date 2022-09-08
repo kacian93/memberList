@@ -20,6 +20,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     @IBOutlet var affiliation: UILabel!
     
     @IBOutlet var memberListTitle: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
