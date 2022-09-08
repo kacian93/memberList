@@ -12,11 +12,15 @@ class TabBarController : UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .gray
+        appearance.backgroundColor = .lightGray
+        
+        appearance.stackedItemWidth = view.frame.width/3
+    
         
         myTabBar.standardAppearance = appearance
         myTabBar.scrollEdgeAppearance = appearance
-        
+    
+        myTabBar.tintColor = .white
 //        myTabBar = UITabBar()
 //        myTabBar.frame = CGRect(x: 0, y: view.frame.height-50, width: view.frame.width, height: 50)
 //        myTabBar.barTintColor = .tertiaryLabel

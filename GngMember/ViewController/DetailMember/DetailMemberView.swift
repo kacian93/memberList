@@ -44,6 +44,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
+
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
         let label2 = cell.contentView.viewWithTag(2) as! UILabel
         

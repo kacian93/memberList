@@ -23,7 +23,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = .white
         
         TableCell.register(to: tableView)
         self.tableView.delegate = self
@@ -41,7 +41,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         position.text = "役職"
         affiliation.text = "所属"
         
-        memberListTitle.backgroundColor = UIColor.tertiaryLabel
+        memberListTitle.backgroundColor = UIColor.lightGray
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

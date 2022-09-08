@@ -22,6 +22,7 @@
 		9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */; };
 		9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BFA28C8A42000F976FA /* TableCell.xib */; };
 		9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BFC28C8A52E00F976FA /* TableCell.swift */; };
+		9F490C0428C9B20A00F976FA /* DetailMemberRow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490C0328C9B20A00F976FA /* DetailMemberRow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GngsWebsiteController.swift; sourceTree = "<group>"; };
 		9F490BFA28C8A42000F976FA /* TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
 		9F490BFC28C8A52E00F976FA /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		9F490C0328C9B20A00F976FA /* DetailMemberRow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailMemberRow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +109,8 @@
 		9F490BF228C5D7BE00F976FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				9F490BF928C89F9F00F976FA /* TableView */,
-				9F490BF028C5D7B800F976FA /* DetailMemberView.swift */,
-				9F490BD128C58A3100F976FA /* MemberListController.swift */,
+				9F490BF928C89F9F00F976FA /* MemberList */,
+				9F490C0228C9AF7900F976FA /* DetailMember */,
 				9F490BEE28C5B1A700F976FA /* TabBarController.swift */,
 				9F490BEC28C5A66200F976FA /* JoinMemberController.swift */,
 				9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */,
@@ -117,13 +118,23 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		9F490BF928C89F9F00F976FA /* TableView */ = {
+		9F490BF928C89F9F00F976FA /* MemberList */ = {
 			isa = PBXGroup;
 			children = (
+				9F490BD128C58A3100F976FA /* MemberListController.swift */,
 				9F490BFA28C8A42000F976FA /* TableCell.xib */,
 				9F490BFC28C8A52E00F976FA /* TableCell.swift */,
 			);
-			path = TableView;
+			path = MemberList;
+			sourceTree = "<group>";
+		};
+		9F490C0228C9AF7900F976FA /* DetailMember */ = {
+			isa = PBXGroup;
+			children = (
+				9F490BF028C5D7B800F976FA /* DetailMemberView.swift */,
+				9F490C0328C9B20A00F976FA /* DetailMemberRow.xib */,
+			);
+			path = DetailMember;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 				9F490BDA28C58A3200F976FA /* LaunchScreen.storyboard in Resources */,
 				9F490BD728C58A3200F976FA /* Assets.xcassets in Resources */,
 				9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */,
+				9F490C0428C9B20A00F976FA /* DetailMemberRow.xib in Resources */,
 				9F490BD528C58A3100F976FA /* Main.storyboard in Resources */,
 				9F490BE528C5996100F976FA /* GngsMember.csv in Resources */,
 			);
