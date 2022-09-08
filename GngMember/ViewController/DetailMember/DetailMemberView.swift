@@ -36,7 +36,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         amember.append(CSVLoad().fromDatetoString(date: member.dateOfEmployee))
         
         memberInfoTitleLabel.text = "社員情報"
-    
+        backButton.tintColor = .white
         
         var view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         view.backgroundColor = .lightGray
