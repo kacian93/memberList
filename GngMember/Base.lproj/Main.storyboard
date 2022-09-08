@@ -29,7 +29,9 @@
                         <viewLayoutGuide key="safeArea" id="3py-0g-NOw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="WebView" id="dwc-sO-UNN"/>
+                    <tabBarItem key="tabBarItem" title="WebView" id="dwc-sO-UNN">
+                        <color key="badgeColor" systemColor="labelColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="gngsWebKit" destination="AS5-yh-kcE" id="aOb-83-wNd"/>
                     </connections>
@@ -113,6 +115,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="myTabBar" destination="uzq-a2-dx7" id="NjA-yI-yam"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="lIO-Fz-Owq"/>
                         <segue destination="qcA-6E-uMG" kind="relationship" relationship="viewControllers" id="uvX-Mt-3L7"/>
                         <segue destination="1ur-ro-JTP" kind="relationship" relationship="viewControllers" id="kpZ-AR-R1U"/>
@@ -130,19 +133,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3VL-ML-xqG" customClass="MemberTableView" customModule="GngMember">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3VL-ML-xqG">
                                 <rect key="frame" x="0.0" y="151" width="414" height="665"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" rowHeight="47" id="P9X-Sc-8pp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" rowHeight="47" id="P9X-Sc-8pp" customClass="TableCell" customModule="GngMember" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P9X-Sc-8pp" id="IUc-hL-CMI">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P9X-Sc-8pp" id="IUc-hL-CMI" customClass="TableCell2">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <accessibility key="accessibilityConfiguration" identifier="memberCell"/>
                                         <connections>
                                             <segue destination="lMB-KH-x9f" kind="showDetail" identifier="showDetailMember" trigger="accessoryAction" id="Fuu-Lh-qYP"/>
                                         </connections>
@@ -166,10 +168,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration" identifier="memberList"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="社員一覧" id="N5k-80-F6C"/>
+                    <tabBarItem key="tabBarItem" title="社員一覧" id="N5k-80-F6C">
+                        <color key="badgeColor" systemColor="labelColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="memberListTitle" destination="Gbj-Ql-UmW" id="NVS-bd-wXk"/>
-                        <outlet property="tableView" destination="3VL-ML-xqG" id="m2G-CZ-Z8h"/>
+                        <outlet property="tableView" destination="3VL-ML-xqG" id="UyJ-mu-FtC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -242,7 +246,9 @@
                         <viewLayoutGuide key="safeArea" id="hpv-X0-a5z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="入力画面" id="I5o-VF-ifz"/>
+                    <tabBarItem key="tabBarItem" title="入力画面" id="I5o-VF-ifz">
+                        <color key="badgeColor" systemColor="labelColor"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="femaleButton" destination="8sl-QQ-Inp" id="Hb9-Ut-QDi"/>
                         <outlet property="femaleLabel" destination="JrH-wo-V0g" id="OQ3-fp-K50"/>
@@ -258,6 +264,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

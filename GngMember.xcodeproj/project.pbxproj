@@ -20,6 +20,8 @@
 		9F490BEF28C5B1A700F976FA /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BEE28C5B1A700F976FA /* TabBarController.swift */; };
 		9F490BF128C5D7B800F976FA /* DetailMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BF028C5D7B800F976FA /* DetailMemberView.swift */; };
 		9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */; };
+		9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BFA28C8A42000F976FA /* TableCell.xib */; };
+		9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BFC28C8A52E00F976FA /* TableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		9F490BEE28C5B1A700F976FA /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9F490BF028C5D7B800F976FA /* DetailMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemberView.swift; sourceTree = "<group>"; };
 		9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GngsWebsiteController.swift; sourceTree = "<group>"; };
+		9F490BFA28C8A42000F976FA /* TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
+		9F490BFC28C8A52E00F976FA /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +107,23 @@
 		9F490BF228C5D7BE00F976FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				9F490BD128C58A3100F976FA /* MemberListController.swift */,
+				9F490BF928C89F9F00F976FA /* TableView */,
 				9F490BF028C5D7B800F976FA /* DetailMemberView.swift */,
+				9F490BD128C58A3100F976FA /* MemberListController.swift */,
 				9F490BEE28C5B1A700F976FA /* TabBarController.swift */,
 				9F490BEC28C5A66200F976FA /* JoinMemberController.swift */,
 				9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9F490BF928C89F9F00F976FA /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				9F490BFA28C8A42000F976FA /* TableCell.xib */,
+				9F490BFC28C8A52E00F976FA /* TableCell.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +186,7 @@
 			files = (
 				9F490BDA28C58A3200F976FA /* LaunchScreen.storyboard in Resources */,
 				9F490BD728C58A3200F976FA /* Assets.xcassets in Resources */,
+				9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */,
 				9F490BD528C58A3100F976FA /* Main.storyboard in Resources */,
 				9F490BE528C5996100F976FA /* GngsMember.csv in Resources */,
 			);
@@ -191,6 +206,7 @@
 				9F490BEF28C5B1A700F976FA /* TabBarController.swift in Sources */,
 				9F490BE728C5997B00F976FA /* Member.swift in Sources */,
 				9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */,
+				9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */,
 				9F490BED28C5A66200F976FA /* JoinMemberController.swift in Sources */,
 				9F490BF128C5D7B800F976FA /* DetailMemberView.swift in Sources */,
 			);
