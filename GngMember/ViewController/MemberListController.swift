@@ -12,15 +12,20 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     var csvMember : [Member] = CSVLoad().loadCSV(filename: "GngsMember")
     @IBOutlet var tableTitle: UITableViewCell!
     
+    @IBOutlet var number: UILabel!
+    @IBOutlet var name: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var position: UILabel!
     
+    @IBOutlet var affiliation: UILabel!
     
     @IBOutlet var memberListTitle: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.lightGray
-
+        
+        TableCell.register(to: tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -31,20 +36,11 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     }
     
     func titlelabel(){
-        let number = UILabel(frame: CGRect(x: 10 + view.frame.size.width / 16, y: 0, width: view.frame.size.width/8 * 3, height: 40))
         number.text = "社員番号"
-        
-        let name = UILabel(frame: CGRect(x: view.frame.size.width/8 * 3, y: 0, width: view.frame.size.width/8, height: 40))
         name.text = "名前"
-        let position = UILabel(frame: CGRect(x: view.frame.size.width/16 * 9, y: 0, width: view.frame.size.width/4, height: 40))
         position.text = "役職"
-        let affiliation = UILabel(frame: CGRect(x: view.frame.size.width/16 * 13 + 5, y: 0, width: view.frame.size.width/4, height: 40))
         affiliation.text = "所属"
         
-        memberListTitle.addSubview(number)
-        memberListTitle.addSubview(name)
-        memberListTitle.addSubview(position)
-        memberListTitle.addSubview(affiliation)
         memberListTitle.backgroundColor = UIColor.tertiaryLabel
     }
     
@@ -89,7 +85,6 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         }
         
         let member = csvMember[indexPath.row]
-        print("willDisplay: " + member.kanjiName)
         cell.display(member)
     }
     

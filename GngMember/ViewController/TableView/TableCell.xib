@@ -46,10 +46,10 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="affiliationLabel" destination="DZg-xh-KEO" id="Xat-dK-Qi8"/>
-                <outlet property="kanjiNameLabel" destination="WmP-0m-IzI" id="4rQ-an-tAE"/>
+                <outlet property="affiliationLabel" destination="DZg-xh-KEO" id="gGg-Cp-Jvr"/>
                 <outlet property="memberNumberLabel" destination="89e-g0-T3Z" id="GfM-zW-x46"/>
-                <outlet property="positionLabel" destination="i8S-eB-zcA" id="uc0-Dz-OgH"/>
+                <outlet property="nameLabel" destination="WmP-0m-IzI" id="xO5-b2-aQY"/>
+                <outlet property="positionLabel" destination="i8S-eB-zcA" id="h2d-Tm-l4Z"/>
             </connections>
             <point key="canvasLocation" x="128.98550724637681" y="37.5"/>
         </tableViewCell>

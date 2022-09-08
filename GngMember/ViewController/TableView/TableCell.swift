@@ -13,16 +13,31 @@ class TableCell : UITableViewCell{
     
     
     @IBOutlet var memberNumberLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var positionLabel: UILabel!
+    @IBOutlet var affiliationLabel: UILabel!
     static let resId = "TableCell"
     
     @IBOutlet var view: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
     static func register(to tableView : UITableView){
         tableView.register(UINib(nibName: "TableCell", bundle: nil), forCellReuseIdentifier: resId)
     }
     
     func display(_ member: Member)  {
-        print("display : \(member.employeeNumber)")
         memberNumberLabel.text = member.employeeNumber
+        nameLabel.text = member.kanjiName
+        positionLabel.text = member.position
+        affiliationLabel.text = member.affiliation
+        
     }
     
 }
