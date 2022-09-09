@@ -12,7 +12,7 @@ class TabBarController : UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .lightGray
+        appearance.backgroundColor = UIColor.quaternaryLabel
         
         appearance.stackedItemWidth = view.frame.width/3
     
@@ -20,7 +20,6 @@ class TabBarController : UITabBarController{
         myTabBar.standardAppearance = appearance
         myTabBar.scrollEdgeAppearance = appearance
     
-        myTabBar.tintColor = .white
 //        myTabBar = UITabBar()
 //        myTabBar.frame = CGRect(x: 0, y: view.frame.height-50, width: view.frame.width, height: 50)
 //        myTabBar.barTintColor = .tertiaryLabel

@@ -14,6 +14,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     var amember : [String] = []
     @IBOutlet var memberInfoTitleLabel: UILabel!
     @IBOutlet var backButton: UIButton!
+    var cell : UITableViewCell = UITableViewCell()
     var xImage : UIImage = UIImage(systemName: "xmark")!
     
     @IBOutlet var tableView: UITableView!
@@ -38,7 +39,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         memberInfoTitleLabel.text = "社員情報"
         backButton.tintColor = .white
         
-        var view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         view.backgroundColor = .lightGray
         self.view.addSubview(view)
         view.addSubview(tableView)
@@ -54,10 +55,18 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
-        let cellview = UIView(frame: CGRect(x: 6, y: 3, width:400, height: 40))
+        cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cellview = UIView(frame: CGRect(x: 6, y: 3, width:400, height: 60))
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
         let label2 = cell.contentView.viewWithTag(2) as! UILabel
+        
         
         label1.text = detailTitle[indexPath.item]
         label2.text = amember[indexPath.item]
@@ -68,11 +77,10 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         cellview.backgroundColor = .white
         
         cell.backgroundColor = UIColor.lightGray
+        cell.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         
         cell.addSubview(cellview)
-        return cell
     }
-    
     @IBAction func clickBackButton(_ sender: UIButton) {
         dismiss(animated: true)
     }

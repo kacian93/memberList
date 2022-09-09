@@ -42,7 +42,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         position.text = "役職"
         affiliation.text = "所属"
         
-        memberListTitle.backgroundColor = UIColor.lightGray
+        memberListTitle.backgroundColor = UIColor.quaternaryLabel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
