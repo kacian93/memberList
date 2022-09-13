@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F3C2D1328CDCB61007931E7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1228CDCB61007931E7 /* Notification.swift */; };
+		9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */; };
+		9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1628D051B7007931E7 /* SignupMember.swift */; };
 		9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCD28C58A3100F976FA /* AppDelegate.swift */; };
 		9F490BD028C58A3100F976FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCF28C58A3100F976FA /* SceneDelegate.swift */; };
 		9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BD128C58A3100F976FA /* MemberListController.swift */; };
@@ -22,13 +25,12 @@
 		9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */; };
 		9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BFA28C8A42000F976FA /* TableCell.xib */; };
 		9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BFC28C8A52E00F976FA /* TableCell.swift */; };
-		9F490C0728CABC3500F976FA /* JoinMemberDefaultRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490C0628CABC3500F976FA /* JoinMemberDefaultRowView.xib */; };
-		9F490C0A28CABDCE00F976FA /* JoinMemberDefaultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490C0928CABDCE00F976FA /* JoinMemberDefaultRow.swift */; };
-		9F490C0C28CADBF800F976FA /* JoinMemberPositionPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490C0B28CADBF800F976FA /* JoinMemberPositionPickerView.xib */; };
-		9F490C0E28CADC1200F976FA /* JoinMemberPositionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490C0D28CADC1200F976FA /* JoinMemberPositionPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F3C2D1228CDCB61007931E7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberDetailView.swift; sourceTree = "<group>"; };
+		9F3C2D1628D051B7007931E7 /* SignupMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMember.swift; sourceTree = "<group>"; };
 		9F490BCA28C58A3100F976FA /* GngMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GngMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F490BCD28C58A3100F976FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F490BCF28C58A3100F976FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,10 +48,6 @@
 		9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GngsWebsiteController.swift; sourceTree = "<group>"; };
 		9F490BFA28C8A42000F976FA /* TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
 		9F490BFC28C8A52E00F976FA /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
-		9F490C0628CABC3500F976FA /* JoinMemberDefaultRowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinMemberDefaultRowView.xib; sourceTree = "<group>"; };
-		9F490C0928CABDCE00F976FA /* JoinMemberDefaultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberDefaultRow.swift; sourceTree = "<group>"; };
-		9F490C0B28CADBF800F976FA /* JoinMemberPositionPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinMemberPositionPickerView.xib; sourceTree = "<group>"; };
-		9F490C0D28CADC1200F976FA /* JoinMemberPositionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberPositionPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F3C2D1028CDCB44007931E7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9F3C2D1128CDCB49007931E7 /* Extension */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		9F3C2D1128CDCB49007931E7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9F3C2D1228CDCB61007931E7 /* Notification.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		9F490BC128C58A3100F976FA = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +96,7 @@
 		9F490BCC28C58A3100F976FA /* GngMember */ = {
 			isa = PBXGroup;
 			children = (
+				9F3C2D1028CDCB44007931E7 /* Helper */,
 				9F490BE928C599AD00F976FA /* Data */,
 				9F490BCD28C58A3100F976FA /* AppDelegate.swift */,
 				9F490BCF28C58A3100F976FA /* SceneDelegate.swift */,
@@ -146,10 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				9F490BEC28C5A66200F976FA /* JoinMemberController.swift */,
-				9F490C0628CABC3500F976FA /* JoinMemberDefaultRowView.xib */,
-				9F490C0928CABDCE00F976FA /* JoinMemberDefaultRow.swift */,
-				9F490C0B28CADBF800F976FA /* JoinMemberPositionPickerView.xib */,
-				9F490C0D28CADC1200F976FA /* JoinMemberPositionPicker.swift */,
+				9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */,
+				9F3C2D1628D051B7007931E7 /* SignupMember.swift */,
 			);
 			path = JoinMember;
 			sourceTree = "<group>";
@@ -215,9 +228,7 @@
 				9F490BDA28C58A3200F976FA /* LaunchScreen.storyboard in Resources */,
 				9F490BD728C58A3200F976FA /* Assets.xcassets in Resources */,
 				9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */,
-				9F490C0C28CADBF800F976FA /* JoinMemberPositionPickerView.xib in Resources */,
 				9F490BD528C58A3100F976FA /* Main.storyboard in Resources */,
-				9F490C0728CABC3500F976FA /* JoinMemberDefaultRowView.xib in Resources */,
 				9F490BE528C5996100F976FA /* GngsMember.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,16 +240,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F490C0E28CADC1200F976FA /* JoinMemberPositionPicker.swift in Sources */,
 				9F490BE428C5996100F976FA /* CSVLoad.swift in Sources */,
 				9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */,
+				9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */,
 				9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */,
+				9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */,
 				9F490BD028C58A3100F976FA /* SceneDelegate.swift in Sources */,
 				9F490BEF28C5B1A700F976FA /* TabBarController.swift in Sources */,
 				9F490BE728C5997B00F976FA /* Member.swift in Sources */,
 				9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */,
-				9F490C0A28CABDCE00F976FA /* JoinMemberDefaultRow.swift in Sources */,
 				9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */,
+				9F3C2D1328CDCB61007931E7 /* Notification.swift in Sources */,
 				9F490BED28C5A66200F976FA /* JoinMemberController.swift in Sources */,
 				9F490BF128C5D7B800F976FA /* DetailMemberView.swift in Sources */,
 			);

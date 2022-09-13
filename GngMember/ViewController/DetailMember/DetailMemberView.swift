@@ -63,7 +63,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cellview = UIView(frame: CGRect(x: 6, y: 3, width:400, height: 60))
+        let cellview = UIView(frame: CGRect(x: 3, y: 1, width:400, height: 60))
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
         let label2 = cell.contentView.viewWithTag(2) as! UILabel
         
