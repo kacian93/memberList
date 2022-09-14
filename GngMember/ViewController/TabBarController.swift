@@ -11,6 +11,8 @@ class TabBarController : UITabBarController{
     @IBOutlet var myTabBar: UITabBar!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //tabBarをカスタマイズするため
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor.quaternaryLabel
         

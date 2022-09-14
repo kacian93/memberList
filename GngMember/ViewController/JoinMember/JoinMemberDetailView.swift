@@ -27,7 +27,7 @@ class JoinMemberDetailView: UIViewController{
         megazineLabel.text = signupMember.megazine ? "許可" : "不可"
         positionLabel.text = signupMember.position
         agreementLabel.text = signupMember.agreement ? "同意" : "非同意"
-        memoLabel.text = signupMember.memo
+        memoLabel.text = signupMember.memo.isEmpty ? "なし" : signupMember.memo
     }
     @IBAction func pushBackButton(_ sender: UIButton) {
         dismiss(animated: true)

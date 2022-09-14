@@ -70,14 +70,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlq-ub-6Zr">
-                                                    <rect key="frame" x="150" y="0.0" width="227" height="60"/>
+                                                    <rect key="frame" x="154" y="0.0" width="230" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAl-py-XkX">
-                                                    <rect key="frame" x="36" y="0.0" width="115" height="60"/>
+                                                    <rect key="frame" x="35" y="0.0" width="115" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -306,7 +306,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Sh-NY-CqB">
+                                                    <textField opaque="NO" tag="4" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Sh-NY-CqB">
                                                         <rect key="frame" x="8" y="46" width="398" height="34"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -471,13 +471,13 @@
                     <connections>
                         <outlet property="checkboxButton" destination="X5I-n0-BiV" id="fNL-cl-qZP"/>
                         <outlet property="femaleButton" destination="gEx-ju-WHu" id="oid-Ab-y71"/>
-                        <outlet property="femaleLabel" destination="b5h-wA-BMw" id="ddo-Tu-RyW"/>
+                        <outlet property="femaleLabel" destination="b5h-wA-BMw" id="iOQ-X6-OX2"/>
                         <outlet property="genderTitle" destination="6WY-Jb-Aa6" id="2Gb-Dx-ABQ"/>
                         <outlet property="idTextField" destination="9tJ-UP-mHa" id="L0X-c7-D5n"/>
                         <outlet property="joinMemberButton" destination="crV-BJ-adk" id="vx9-hi-57m"/>
                         <outlet property="magazineSwitch" destination="w6c-0p-5Hk" id="fig-qJ-hAB"/>
                         <outlet property="maleButton" destination="7Kq-Nn-qd5" id="RHM-8v-j0B"/>
-                        <outlet property="maleLabel" destination="PIH-RI-XO7" id="Dek-Yo-NRT"/>
+                        <outlet property="maleLabel" destination="PIH-RI-XO7" id="leJ-yD-7oZ"/>
                         <outlet property="memoTextView" destination="nuf-Wq-uhT" id="HqN-hA-MTo"/>
                         <outlet property="passwordTextField" destination="AcO-9R-yS0" id="L3f-rE-1nT"/>
                         <outlet property="positionTextField" destination="5Sh-NY-CqB" id="zyC-Pj-ez4"/>

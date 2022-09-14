@@ -26,6 +26,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         
         self.view.backgroundColor = .white
         
+        //TableCell.xibを登録
         TableCell.register(to: tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self

@@ -95,6 +95,7 @@ class JoinMemberController : UIViewController{
         self.positionTextField.inputView = pickerView
         self.positionTextField.inputAccessoryView = toolbar
         
+        //cursor 
         positionTextField.tintColor = UIColor.clear
         
         let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -112,9 +113,20 @@ class JoinMemberController : UIViewController{
         self.positionTextField.delegate = self
         
         
+        
         idTextField.becomeFirstResponder()
         self.positionTextField.text = positionArray[0]
         
+        //男のlabelをクリックした時、作動するため
+        let tap = UIGestureRecognizer(target: self, action: #selector(JoinMemberController.pushMaleLabel))
+        maleLabel.isUserInteractionEnabled = true
+        maleLabel.addGestureRecognizer(tap)
+        
+        
+        
+        let femaleTap = UIGestureRecognizer(target: self, action: #selector(JoinMemberController.pushFemalLabel))
+        maleLabel.isUserInteractionEnabled = true
+        maleLabel.addGestureRecognizer(femaleTap)
         //        let optionClouser = {(action : UIAction) in
         //        }
         
@@ -128,13 +140,30 @@ class JoinMemberController : UIViewController{
         //            UIAction(title: "代表", state:  .on, handler:optionClouser)
         
         //        ])
+        
+        
+        
     }
     
     @IBAction func changeSwitch(_ sender: Any) {
         magazineSwitch.isSelected.toggle()
-        print("magazineSwitch.isSelected : \(magazineSwitch.isSelected)")
     }
     
+    @objc func positionArrow(){
+        
+    }
+    @objc func pushMaleLabel(_ sender : UITapGestureRecognizer){
+        maleButton.isSelected = true
+        femaleButton.isSelected = false
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+    }
+    @objc func pushFemalLabel(_ sender : UITapGestureRecognizer){
+        maleButton.isSelected = false
+        femaleButton.isSelected = true
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+    }
     //約款同意
     @IBAction func checkboxToggle(_ sender: UIButton) {
         checkboxButton.isSelected.toggle()
