@@ -74,30 +74,35 @@ class JoinMemberController : UIViewController{
         scrollView.flashScrollIndicators()
         scrollView.contentSize = CGSize(width: view.frame.width, height: 850)
         
+        //性別ボタンの基本値
         maleButton.isSelected = true
         maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
         femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
         
+        //約款の基本値
         checkboxButton.isSelected = true
         checkboxButton.setImage(checkboxButton.isSelected ? checkImage : noneCheckImage, for: .normal)
         
+        //pickerviewのキャンセル、決定ボタンのため
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
         let doneItem = UIBarButtonItem(title: "決定", style: .done, target: self, action: #selector(JoinMemberController.done))
         let cancelItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(JoinMemberController.cancel))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-
+        
         toolbar.setItems([cancelItem,flexibleSpace,doneItem], animated: true)
         
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         magazineSwitch.isSelected = true
         
+        //pickerView追加
         self.positionTextField.inputView = pickerView
         self.positionTextField.inputAccessoryView = toolbar
         
-        //cursor 
+        //cursorが表示されないように
         positionTextField.tintColor = UIColor.clear
         
+        //keyboard以外をタッチした時、キーボードを隠す
         let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGR.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGR)
@@ -106,6 +111,7 @@ class JoinMemberController : UIViewController{
         //keyboard showing
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         
         self.idTextField.delegate = self
         self.passwordTextField.delegate = self
@@ -141,7 +147,20 @@ class JoinMemberController : UIViewController{
         
         //        ])
         
-        
+        //職業の下の矢印のため
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        //ボタンのY座標は(TextFieldの高さ-ボタンの高さ)/2
+        let button = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
+        button.contentEdgeInsets = .init(top: 0, left: 0, bottom: 3, right: 0)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.tintColor = .black
+        button.layer.cornerRadius = button.frame.width / 2
+        //ボタンに処理を追加
+        button.addTarget(self, action: #selector(makePositionArrow), for: .touchUpInside)
+        view.addSubview(button)
+        //デフォルトだと表示されていない
+        positionTextField.rightViewMode = .always
+        positionTextField.rightView = view
         
     }
     
@@ -149,9 +168,10 @@ class JoinMemberController : UIViewController{
         magazineSwitch.isSelected.toggle()
     }
     
-    @objc func positionArrow(){
+    @objc func makePositionArrow(){
         
     }
+    //男の
     @objc func pushMaleLabel(_ sender : UITapGestureRecognizer){
         maleButton.isSelected = true
         femaleButton.isSelected = false
@@ -194,7 +214,6 @@ class JoinMemberController : UIViewController{
     }
     
     @objc func done(_ sender : UIBarButtonItem) {
-        sender.title = "決定"
         self.positionTextField.endEditing(true)
     }
     //keyboard関連
@@ -218,6 +237,8 @@ class JoinMemberController : UIViewController{
             self.view.frame.origin.y = 0
         }
     }
+    
+    //キーボードでreturnボタンを押せば次のTextfieldに移動する
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
         
@@ -370,6 +391,7 @@ class JoinMemberController : UIViewController{
         signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleButton.isSelected ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
         
         if validationResultBool {
+            //ページ移動するため。下のprepareとセット
             self.performSegue(withIdentifier: "joinMemberDetail", sender: self.signupMember)
         }else{
             
