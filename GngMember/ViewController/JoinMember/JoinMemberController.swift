@@ -26,6 +26,8 @@ class JoinMemberController : UIViewController{
     @IBOutlet var magazineSwitch: UISwitch!
     @IBOutlet var positionTextField: UITextField!
     
+    @IBOutlet var maleView: UIView!
+    @IBOutlet var femaleView: UIView!
     @IBOutlet var genderTitle: UILabel!
     @IBOutlet var femaleLabel: UILabel!
     @IBOutlet var maleLabel: UILabel!
@@ -70,9 +72,8 @@ class JoinMemberController : UIViewController{
         pickerView = UIPickerView()
         
         
-        scrollView.contentSize = view.frame.size
         scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 850)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
         
         //性別ボタンの基本値
         maleButton.isSelected = true
@@ -82,6 +83,20 @@ class JoinMemberController : UIViewController{
         //約款の基本値
         checkboxButton.isSelected = true
         checkboxButton.setImage(checkboxButton.isSelected ? checkImage : noneCheckImage, for: .normal)
+        
+        //職業の下の矢印のため
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        //ボタンのY座標は(TextFieldの高さ-ボタンの高さ)/2
+        let button = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.tintColor = .black
+        button.layer.cornerRadius = button.frame.width / 2
+        //ボタンに処理を追加
+        button.addTarget(self, action: #selector(makePositionArrow), for: .touchUpInside)
+        view.addSubview(button)
+        //デフォルトだと表示されていない
+        positionTextField.rightViewMode = .always
+        positionTextField.rightView = view
         
         //pickerviewのキャンセル、決定ボタンのため
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
@@ -93,6 +108,8 @@ class JoinMemberController : UIViewController{
         
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        
+        
         magazineSwitch.isSelected = true
         
         //pickerView追加
@@ -123,16 +140,6 @@ class JoinMemberController : UIViewController{
         idTextField.becomeFirstResponder()
         self.positionTextField.text = positionArray[0]
         
-        //男のlabelをクリックした時、作動するため
-        let tap = UIGestureRecognizer(target: self, action: #selector(JoinMemberController.pushMaleLabel))
-        maleLabel.isUserInteractionEnabled = true
-        maleLabel.addGestureRecognizer(tap)
-        
-        
-        
-        let femaleTap = UIGestureRecognizer(target: self, action: #selector(JoinMemberController.pushFemalLabel))
-        maleLabel.isUserInteractionEnabled = true
-        maleLabel.addGestureRecognizer(femaleTap)
         //        let optionClouser = {(action : UIAction) in
         //        }
         
@@ -147,23 +154,33 @@ class JoinMemberController : UIViewController{
         
         //        ])
         
-        //職業の下の矢印のため
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        //ボタンのY座標は(TextFieldの高さ-ボタンの高さ)/2
-        let button = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
-        button.contentEdgeInsets = .init(top: 0, left: 0, bottom: 3, right: 0)
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.tintColor = .black
-        button.layer.cornerRadius = button.frame.width / 2
-        //ボタンに処理を追加
-        button.addTarget(self, action: #selector(makePositionArrow), for: .touchUpInside)
-        view.addSubview(button)
-        //デフォルトだと表示されていない
-        positionTextField.rightViewMode = .always
-        positionTextField.rightView = view
+        
+        
+        //性別で男をクリックした時
+        let maleGesture = UITapGestureRecognizer(target: self, action:  #selector (self.maleAction (_:)))
+        self.maleView.addGestureRecognizer(maleGesture)
+        
+        
+        let femaleGesture = UITapGestureRecognizer(target: self, action:  #selector (self.femaleAction (_:)))
+        self.femaleView.addGestureRecognizer(femaleGesture)
         
     }
-    
+    @objc func maleAction(_ sender:UITapGestureRecognizer){
+        
+        maleButton.isSelected = true
+        femaleButton.isSelected = false
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+        
+    }
+    @objc func femaleAction(_ sender:UITapGestureRecognizer){
+        
+        maleButton.isSelected = false
+        femaleButton.isSelected = true
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+        
+    }
     @IBAction func changeSwitch(_ sender: Any) {
         magazineSwitch.isSelected.toggle()
     }
@@ -171,28 +188,15 @@ class JoinMemberController : UIViewController{
     @objc func makePositionArrow(){
         
     }
-    //男の
-    @objc func pushMaleLabel(_ sender : UITapGestureRecognizer){
-        maleButton.isSelected = true
-        femaleButton.isSelected = false
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-    }
-    @objc func pushFemalLabel(_ sender : UITapGestureRecognizer){
-        maleButton.isSelected = false
-        femaleButton.isSelected = true
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-    }
     //約款同意
-    @IBAction func checkboxToggle(_ sender: UIButton) {
+    @IBAction func checkboxToggle(_ sender: Any) {
         checkboxButton.isSelected.toggle()
         checkboxBool.toggle()
         
         
         checkboxButton.setImage(checkboxButton.isSelected ? checkImage : noneCheckImage, for: .normal)
     }
-    @IBAction func pushmaleButton(_ sender: UIButton) {
+    @IBAction func pushmaleButton(_ sender: Any) {
         maleButton.isSelected = true
         femaleButton.isSelected = false
         maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)

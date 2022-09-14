@@ -30,6 +30,6 @@ class JoinMemberDetailView: UIViewController{
         memoLabel.text = signupMember.memo.isEmpty ? "なし" : signupMember.memo
     }
     @IBAction func pushBackButton(_ sender: UIButton) {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }
