@@ -73,8 +73,8 @@ class JoinMemberController : UIViewController{
         
         
         scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
-        
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+//        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
         maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
