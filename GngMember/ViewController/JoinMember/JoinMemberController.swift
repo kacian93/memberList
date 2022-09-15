@@ -63,6 +63,7 @@ class JoinMemberController : UIViewController{
     var repasswordMatchBool : Bool  = false
     
     
+    @IBOutlet var innerView: UIView!
     let defaultAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default)
     var alert : UIAlertController = UIAlertController()
     
@@ -70,10 +71,8 @@ class JoinMemberController : UIViewController{
         super.viewDidLoad()
         
         pickerView = UIPickerView()
-        
-        
-        scrollView.flashScrollIndicators()
-//        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+//        scrollView.flashScrollIndicators()
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 907)
 //        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
@@ -136,8 +135,6 @@ class JoinMemberController : UIViewController{
         self.positionTextField.delegate = self
         
         
-        
-        idTextField.becomeFirstResponder()
         self.positionTextField.text = positionArray[0]
         
         //        let optionClouser = {(action : UIAction) in
