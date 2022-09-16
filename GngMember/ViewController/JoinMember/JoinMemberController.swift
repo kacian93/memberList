@@ -62,7 +62,6 @@ class JoinMemberController : UIViewController{
     var repasswordBool : Bool = false
     var repasswordMatchBool : Bool  = false
     
-    
     @IBOutlet var innerView: UIView!
     let defaultAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default)
     var alert : UIAlertController = UIAlertController()
@@ -72,7 +71,7 @@ class JoinMemberController : UIViewController{
         
         pickerView = UIPickerView()
 //        scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 907)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 897)
 //        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
@@ -227,8 +226,8 @@ class JoinMemberController : UIViewController{
         }
         
         if self.view.frame.origin.y == 0 {
-            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                self.view.frame.origin.y -= keyboardRect.height
+            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+                self.view.frame.origin.y -= (keyboardRect - 80)
             }
         }
     }
@@ -305,13 +304,25 @@ class JoinMemberController : UIViewController{
         var result  : Bool = false
         if idBool == false{
             alert = UIAlertController(title: "idを入力してください。", message: "IDが空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            
+            
+            let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.idTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(idAlertAction)
+            
             self.present(alert, animated: true, completion: nil)
             result = false
+            
         }else if idFormatBool == false{
             
             alert = UIAlertController(title: "メールアドレスを入力してください。", message: "IDはメールアドレスです。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.idTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(idAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }else{
@@ -332,7 +343,11 @@ class JoinMemberController : UIViewController{
         var result : Bool = false
         if positionCheck() == false{
             alert = UIAlertController(title: "職業を選択してください。", message: "職業を選択してください。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let positionAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.positionTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(positionAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }
@@ -345,30 +360,50 @@ class JoinMemberController : UIViewController{
         var result  : Bool = false
         if passwordBool == false{
             alert = UIAlertController(title: "パスワードを入力してください。", message: "パスワードが空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let passAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.passwordTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(passAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }else if passwordFormatBool == false{
             
             alert = UIAlertController(title: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let passAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.passwordTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(passAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }else if repasswordBool == false{
             alert = UIAlertController(title: "パスワード(再入力)が空いていおります。", message: "パスワード(再入力)を入力してください。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.repasswordTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(repassAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
             
         } else if repasswordMatchBool == false{
             alert = UIAlertController(title: "パスワード(再入力)とパスワードが合いません。", message: "パスワード(再入力)とパスワードが合いません。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.repasswordTextField.becomeFirstResponder()
+            })
+            
+            alert.addAction(repassAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }else if checkboxBool == false{
             
             alert = UIAlertController(title: "約款に同意してください。", message: "約款に同意してください。", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(defaultAction)
+            let agreementAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
+                self.checkboxButton.becomeFirstResponder()
+            })
+            
+            alert.addAction(agreementAlertAction)
             self.present(alert, animated: true, completion: nil)
             result = false
         }
@@ -381,6 +416,7 @@ class JoinMemberController : UIViewController{
     @IBAction func joinMemberValidation(_ sender: Any) {
         idcheck()
         passwordcheck()
+        positionCheck()
         
         
         let idResult : Bool = idValidation()
@@ -395,7 +431,6 @@ class JoinMemberController : UIViewController{
             //ページ移動するため。下のprepareとセット
             self.performSegue(withIdentifier: "joinMemberDetail", sender: self.signupMember)
         }else{
-            
         }
     }
     
@@ -446,4 +481,5 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
         }
         return true
     }
+    
 }

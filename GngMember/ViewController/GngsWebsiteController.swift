@@ -35,6 +35,8 @@ class GngsWebsiteController:UIViewController{
         
         pageForwardButton.tintColor =
         (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
+        
+        gngsWebKit.navigationDelegate = self
     }
     
     @IBAction func pushReloadButton(_ sender: Any) {
@@ -52,13 +54,36 @@ class GngsWebsiteController:UIViewController{
     }
 }
 extension GngsWebsiteController : WKNavigationDelegate{
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+//        
+//            print("didStartProvisionalNavigation")
+//            
+//            pageBackButton.tintColor =
+//            (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
+//            
+//            
+//            pageForwardButton.tintColor =
+//            (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
+//
+//    }
+//    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+//        print("didCommit")
+//        
+//        pageBackButton.tintColor =
+//        (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
+//        
+//        
+//        pageForwardButton.tintColor =
+//        (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
+//    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            print("didFinish")
         
-            pageBackButton.tintColor =
-            (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
-            
-            
-            pageForwardButton.tintColor =
-            (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
+        pageBackButton.tintColor =
+        (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
+        
+        
+        pageForwardButton.tintColor =
+        (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
     }
 }
