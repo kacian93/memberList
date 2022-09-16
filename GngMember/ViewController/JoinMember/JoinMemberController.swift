@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 class JoinMemberController : UIViewController{
     
+    //MARK:  変数
     var signupMember : SignupMember = SignupMember()
     
     @IBOutlet var tableView: UITableView!
@@ -66,6 +67,8 @@ class JoinMemberController : UIViewController{
     let defaultAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default)
     var alert : UIAlertController = UIAlertController()
     
+    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,6 +164,8 @@ class JoinMemberController : UIViewController{
         self.femaleView.addGestureRecognizer(femaleGesture)
         
     }
+    
+    //MARK: --Method
     @objc func maleAction(_ sender:UITapGestureRecognizer){
         
         maleButton.isSelected = true
@@ -216,7 +221,7 @@ class JoinMemberController : UIViewController{
     @objc func done(_ sender : UIBarButtonItem) {
         self.positionTextField.endEditing(true)
     }
-    //keyboard関連
+    //MARK: keyboard関連
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
@@ -252,7 +257,7 @@ class JoinMemberController : UIViewController{
     }
     
     
-    //validationとエラーメッセージ
+    //MARK: validationとエラーメッセージ
     func idcheck() {
         
         if idTextField.text!.isEmpty, idTextField.text! == ""{
@@ -416,7 +421,6 @@ class JoinMemberController : UIViewController{
     @IBAction func joinMemberValidation(_ sender: Any) {
         idcheck()
         passwordcheck()
-        positionCheck()
         
         
         let idResult : Bool = idValidation()
@@ -446,7 +450,7 @@ class JoinMemberController : UIViewController{
     }
 }
 
-
+//MARK: -- Delegate, DataSource 関連
 extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , UITextFieldDelegate{
     
     

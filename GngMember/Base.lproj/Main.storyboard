@@ -545,7 +545,6 @@
                         <outlet property="genderTitle" destination="6WY-Jb-Aa6" id="2Gb-Dx-ABQ"/>
                         <outlet property="idTextField" destination="9tJ-UP-mHa" id="L0X-c7-D5n"/>
                         <outlet property="innerView" destination="8GI-Tv-q7j" id="f9t-zF-yIt"/>
-                        <outlet property="joinMemberButton" destination="crV-BJ-adk" id="LAp-3z-DqI"/>
                         <outlet property="magazineSwitch" destination="w6c-0p-5Hk" id="fig-qJ-hAB"/>
                         <outlet property="maleButton" destination="7Kq-Nn-qd5" id="RHM-8v-j0B"/>
                         <outlet property="maleLabel" destination="PIH-RI-XO7" id="leJ-yD-7oZ"/>
