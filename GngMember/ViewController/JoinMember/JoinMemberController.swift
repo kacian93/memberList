@@ -74,7 +74,7 @@ class JoinMemberController : UIViewController{
         
         pickerView = UIPickerView()
 //        scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 897)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 737)
 //        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
