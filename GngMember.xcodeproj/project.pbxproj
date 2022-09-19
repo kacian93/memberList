@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F3C2D1328CDCB61007931E7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1228CDCB61007931E7 /* Notification.swift */; };
 		9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */; };
 		9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1628D051B7007931E7 /* SignupMember.swift */; };
 		9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCD28C58A3100F976FA /* AppDelegate.swift */; };
@@ -28,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9F3C2D1228CDCB61007931E7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberDetailView.swift; sourceTree = "<group>"; };
 		9F3C2D1628D051B7007931E7 /* SignupMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMember.swift; sourceTree = "<group>"; };
 		9F490BCA28C58A3100F976FA /* GngMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GngMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,22 +59,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9F3C2D1028CDCB44007931E7 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				9F3C2D1128CDCB49007931E7 /* Extension */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		9F3C2D1128CDCB49007931E7 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				9F3C2D1228CDCB61007931E7 /* Notification.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		9F490BC128C58A3100F976FA = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +78,6 @@
 		9F490BCC28C58A3100F976FA /* GngMember */ = {
 			isa = PBXGroup;
 			children = (
-				9F3C2D1028CDCB44007931E7 /* Helper */,
 				9F490BE928C599AD00F976FA /* Data */,
 				9F490BCD28C58A3100F976FA /* AppDelegate.swift */,
 				9F490BCF28C58A3100F976FA /* SceneDelegate.swift */,
@@ -250,7 +231,6 @@
 				9F490BE728C5997B00F976FA /* Member.swift in Sources */,
 				9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */,
 				9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */,
-				9F3C2D1328CDCB61007931E7 /* Notification.swift in Sources */,
 				9F490BED28C5A66200F976FA /* JoinMemberController.swift in Sources */,
 				9F490BF128C5D7B800F976FA /* DetailMemberView.swift in Sources */,
 			);

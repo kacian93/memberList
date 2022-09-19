@@ -1,3 +1,4 @@
+//MARK: -- 社員一覧の一つずつのセルを作るため
 //
 //  TableCellView.swift
 //  GngMember
@@ -11,15 +12,20 @@ import SwiftUI
 class TableCell : UITableViewCell{
     
     
-    
+    //社員番号
     @IBOutlet var memberNumberLabel: UILabel!
+    //名前
     @IBOutlet var nameLabel: UILabel!
+    //職位
     @IBOutlet var positionLabel: UILabel!
+    //所属
     @IBOutlet var affiliationLabel: UILabel!
+    
     static let resId = "TableCell"
     
     @IBOutlet var view: UIView!
     
+    //MARK: -- Default override
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -28,10 +34,13 @@ class TableCell : UITableViewCell{
         super.setSelected(selected, animated: animated)
     }
     
+    //MARK: -- method
+    //TableViewに登録するため
     static func register(to tableView : UITableView){
         tableView.register(UINib(nibName: "TableCell", bundle: nil), forCellReuseIdentifier: resId)
     }
     
+    //セルに値の設定
     func display(_ member: Member)  {
         memberNumberLabel.text = member.employeeNumber
         nameLabel.text = member.kanjiName

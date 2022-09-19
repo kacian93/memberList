@@ -1,3 +1,4 @@
+//MARK: --社員一覧の表示のため。
 //
 //  ViewController.swift
 //  GngMember
@@ -8,19 +9,26 @@
 import UIKit
 
 class MemberListController: UIViewController,UITableViewDelegate, UITableViewDataSource{
-    
+    //MARK: --変数
+    //CSVファイルを読んで配列に入れいる
     var csvMember : [Member] = CSVLoad().loadCSV(filename: "GngsMember")
     @IBOutlet var tableTitle: UITableViewCell!
     
-    @IBOutlet var number: UILabel!
-    @IBOutlet var name: UILabel!
+    //社員一覧のTableView
     @IBOutlet var tableView: UITableView!
+    //社員番号
+    @IBOutlet var number: UILabel!
+    //社員名前
+    @IBOutlet var name: UILabel!
+    //職位
     @IBOutlet var position: UILabel!
-    
+    //所属
     @IBOutlet var affiliation: UILabel!
     
+    //タイトル
     @IBOutlet var memberListTitle: UIView!
     
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +45,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         
     }
     
+    //社員一覧のタイトル設定
     func titlelabel(){
         number.text = "社員番号"
         name.text = "名前"
@@ -46,10 +55,14 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         memberListTitle.backgroundColor = UIColor.quaternaryLabel
     }
     
+    //MARK: --delegate, datasource
+    //tableViewのCell数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return csvMember.count
     }
+
     
+    //特定(indexPath)なCellを作る。Datasourceに渡す
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         tableView.dequeueReusableCell(withIdentifier: TableCell.resId, for: indexPath)
@@ -79,22 +92,24 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
 //        return cell
 //
     }
-    
+
+    //cellを表示。delegateに渡す
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? TableCell else {
             assert(false)
             return
         }
-        
+
         let member = csvMember[indexPath.row]
         cell.display(member)
     }
     
+    //cellを選択してとき、Segueを動く
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetailMember", sender: nil)
     }
     
-    
+    //segueの設定
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailMember" {
             if let indexPath = tableView.indexPathForSelectedRow {

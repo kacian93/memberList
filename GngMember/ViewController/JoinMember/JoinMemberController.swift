@@ -74,7 +74,7 @@ class JoinMemberController : UIViewController{
         
         pickerView = UIPickerView()
 //        scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 737)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 750)
 //        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
@@ -308,7 +308,7 @@ class JoinMemberController : UIViewController{
     func idValidation() -> Bool {
         var result  : Bool = false
         if idBool == false{
-            alert = UIAlertController(title: "idを入力してください。", message: "IDが空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
+            alert = UIAlertController(title: "IDを入力してください。", message: "IDを入力してください。", preferredStyle: UIAlertController.Style.alert)
             
             
             let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
@@ -364,7 +364,7 @@ class JoinMemberController : UIViewController{
     func passwordValidation() -> Bool {
         var result  : Bool = false
         if passwordBool == false{
-            alert = UIAlertController(title: "パスワードを入力してください。", message: "パスワードが空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
+            alert = UIAlertController(title: "パスワードを入力してください。", message: "パスワードを入力してください。", preferredStyle: UIAlertController.Style.alert)
             let passAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
                 self.passwordTextField.becomeFirstResponder()
             })
@@ -383,7 +383,7 @@ class JoinMemberController : UIViewController{
             self.present(alert, animated: true, completion: nil)
             result = false
         }else if repasswordBool == false{
-            alert = UIAlertController(title: "パスワード(再入力)が空いていおります。", message: "パスワード(再入力)を入力してください。", preferredStyle: UIAlertController.Style.alert)
+            alert = UIAlertController(title: "パスワード(再入力)を入力してください。", message: "パスワード(再入力)が空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
             let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
                 self.repasswordTextField.becomeFirstResponder()
             })
@@ -393,7 +393,7 @@ class JoinMemberController : UIViewController{
             result = false
             
         } else if repasswordMatchBool == false{
-            alert = UIAlertController(title: "パスワード(再入力)とパスワードが合いません。", message: "パスワード(再入力)とパスワードが合いません。", preferredStyle: UIAlertController.Style.alert)
+            alert = UIAlertController(title: "パスワード(再入力)とパスワードが一致しません。", message: "パスワード(再入力)とパスワードが一致しません。", preferredStyle: UIAlertController.Style.alert)
             let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
                 self.repasswordTextField.becomeFirstResponder()
             })
@@ -433,7 +433,7 @@ class JoinMemberController : UIViewController{
         
         if validationResultBool {
             //ページ移動するため。下のprepareとセット
-            self.performSegue(withIdentifier: "joinMemberDetail", sender: self.signupMember)
+            self.performSegue(withIdentifier: "joinMemberDetail", sender: nil)
         }else{
         }
     }
