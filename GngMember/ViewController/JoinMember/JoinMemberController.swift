@@ -23,9 +23,11 @@ class JoinMemberController : UIViewController{
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var repasswordTextField: UITextField!
     
-    
+    //メールメガジン受信のswitch
     @IBOutlet var magazineSwitch: UISwitch!
+    //職位のText Field
     @IBOutlet var positionTextField: UITextField!
+    
     
     @IBOutlet var maleView: UIView!
     @IBOutlet var femaleView: UIView!
@@ -43,7 +45,8 @@ class JoinMemberController : UIViewController{
     
     var pickerView: UIPickerView!
     
-    
+    var passwordButton = UIButton()
+    var repasswordButton = UIButton()
     let noneCheckImage = UIImage(systemName: "square")
     let checkImage = UIImage(systemName: "checkmark.square.fill")
     
@@ -73,21 +76,26 @@ class JoinMemberController : UIViewController{
         super.viewDidLoad()
         
         pickerView = UIPickerView()
-//        scrollView.flashScrollIndicators()
+        //        scrollView.flashScrollIndicators()
         scrollView.contentSize = CGSize(width: view.frame.width, height: 750)
-//        scrollView.contentOffset.y
+        //        scrollView.contentOffset.y
         //性別ボタンの基本値
         maleButton.isSelected = true
         maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
         femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
         
+        idTextField.keyboardType = .emailAddress
+        passwordTextField.keyboardType = .asciiCapable
+        
         //約款の基本値
         checkboxButton.isSelected = true
         checkboxButton.setImage(checkboxButton.isSelected ? checkImage : noneCheckImage, for: .normal)
+        checkboxButton.backgroundColor = .clear
+        
+        
         
         //職業の下の矢印のため
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        //ボタンのY座標は(TextFieldの高さ-ボタンの高さ)/2
         let button = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.tintColor = .black
@@ -98,6 +106,27 @@ class JoinMemberController : UIViewController{
         //デフォルトだと表示されていない
         positionTextField.rightViewMode = .always
         positionTextField.rightView = view
+        
+        //password 目メークを押せば見えるように
+        let passwordView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        passwordButton = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
+        passwordButton.setImage(UIImage(systemName: passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
+        passwordButton.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
+        passwordView.addSubview(passwordButton)
+        
+        passwordTextField.rightViewMode = .always
+        passwordTextField.rightView = passwordView
+        
+        let repasswordView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        repasswordButton = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
+        repasswordButton.setImage(UIImage(systemName: repasswordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
+        repasswordButton.addTarget(self, action: #selector(showRepassword), for: .touchUpInside)
+        repasswordView.addSubview(repasswordButton)
+        
+        repasswordTextField.rightViewMode = .always
+        repasswordTextField.rightView = repasswordView
+        
+        
         
         //pickerviewのキャンセル、決定ボタンのため
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
@@ -185,7 +214,27 @@ class JoinMemberController : UIViewController{
     @IBAction func changeSwitch(_ sender: Any) {
         magazineSwitch.isSelected.toggle()
     }
-    
+    @objc func showRepassword(){
+        
+        if repasswordTextField.isSecureTextEntry == true{
+            repasswordTextField.isSecureTextEntry = false
+            
+        }else{
+            repasswordTextField.isSecureTextEntry=true
+        }
+        
+        repasswordButton.setImage(UIImage(systemName: repasswordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
+    }
+    @objc func showPassword(){
+        if passwordTextField.isSecureTextEntry == true{
+            passwordTextField.isSecureTextEntry = false
+            
+        }else{
+            passwordTextField.isSecureTextEntry=true
+        }
+        
+        passwordButton.setImage(UIImage(systemName: passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
+    }
     @objc func makePositionArrow(){
         
     }
@@ -258,6 +307,16 @@ class JoinMemberController : UIViewController{
     
     
     //MARK: validationとエラーメッセージ
+    
+    func errorMessage(message:  String, view : UIView) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: .default, handler: { _ in
+            view.becomeFirstResponder()
+        })
+        
+        alert.addAction(idAlertAction)
+        self.present(alert, animated: true, completion: nil)
+    }
     func idcheck() {
         
         if idTextField.text!.isEmpty, idTextField.text! == ""{
@@ -308,27 +367,12 @@ class JoinMemberController : UIViewController{
     func idValidation() -> Bool {
         var result  : Bool = false
         if idBool == false{
-            alert = UIAlertController(title: "IDを入力してください。", message: "IDを入力してください。", preferredStyle: UIAlertController.Style.alert)
-            
-            
-            let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.idTextField.becomeFirstResponder()
-            })
-            
-            alert.addAction(idAlertAction)
-            
-            self.present(alert, animated: true, completion: nil)
+            errorMessage(message: "IDを入力してください。", view: self.idTextField)
             result = false
             
         }else if idFormatBool == false{
+            errorMessage(message: "メールアドレスを入力してください。", view: self.idTextField)
             
-            alert = UIAlertController(title: "メールアドレスを入力してください。", message: "IDはメールアドレスです。", preferredStyle: UIAlertController.Style.alert)
-            let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.idTextField.becomeFirstResponder()
-            })
-            
-            alert.addAction(idAlertAction)
-            self.present(alert, animated: true, completion: nil)
             result = false
         }else{
             result = true
@@ -347,13 +391,7 @@ class JoinMemberController : UIViewController{
     func positionValidation() -> Bool {
         var result : Bool = false
         if positionCheck() == false{
-            alert = UIAlertController(title: "職業を選択してください。", message: "職業を選択してください。", preferredStyle: UIAlertController.Style.alert)
-            let positionAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.positionTextField.becomeFirstResponder()
-            })
-            
-            alert.addAction(positionAlertAction)
-            self.present(alert, animated: true, completion: nil)
+            errorMessage(message: "職業を選択してください。", view: positionTextField)
             result = false
         }
         else{
@@ -364,52 +402,24 @@ class JoinMemberController : UIViewController{
     func passwordValidation() -> Bool {
         var result  : Bool = false
         if passwordBool == false{
-            alert = UIAlertController(title: "パスワードを入力してください。", message: "パスワードを入力してください。", preferredStyle: UIAlertController.Style.alert)
-            let passAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.passwordTextField.becomeFirstResponder()
-            })
-            
-            alert.addAction(passAlertAction)
-            self.present(alert, animated: true, completion: nil)
+            errorMessage(message: "パスワードを入力してください。", view: passwordTextField)
             result = false
         }else if passwordFormatBool == false{
             
-            alert = UIAlertController(title: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", preferredStyle: UIAlertController.Style.alert)
-            let passAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.passwordTextField.becomeFirstResponder()
-            })
-            
-            alert.addAction(passAlertAction)
-            self.present(alert, animated: true, completion: nil)
+                errorMessage(message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", view: passwordTextField)
+        
             result = false
         }else if repasswordBool == false{
-            alert = UIAlertController(title: "パスワード(再入力)を入力してください。", message: "パスワード(再入力)が空いております。\n 入力してください。", preferredStyle: UIAlertController.Style.alert)
-            let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.repasswordTextField.becomeFirstResponder()
-            })
             
-            alert.addAction(repassAlertAction)
-            self.present(alert, animated: true, completion: nil)
+                errorMessage(message: "パスワード(再入力)を入力してください。", view: repasswordTextField)
             result = false
             
         } else if repasswordMatchBool == false{
-            alert = UIAlertController(title: "パスワード(再入力)とパスワードが一致しません。", message: "パスワード(再入力)とパスワードが一致しません。", preferredStyle: UIAlertController.Style.alert)
-            let repassAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.repasswordTextField.becomeFirstResponder()
-            })
             
-            alert.addAction(repassAlertAction)
-            self.present(alert, animated: true, completion: nil)
+                errorMessage(message: "パスワード(再入力)とパスワードが一致しません。", view: repasswordTextField)
             result = false
         }else if checkboxBool == false{
-            
-            alert = UIAlertController(title: "約款に同意してください。", message: "約款に同意してください。", preferredStyle: UIAlertController.Style.alert)
-            let agreementAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default, handler: { _ in
-                self.checkboxButton.becomeFirstResponder()
-            })
-            
-            alert.addAction(agreementAlertAction)
-            self.present(alert, animated: true, completion: nil)
+            errorMessage(message: "約款に同意してください。", view: checkboxButton)
             result = false
         }
         else{
@@ -478,12 +488,37 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
         // Dispose of any resources that can be recreated.
     }
     
-    //positionTextFieldのみキーボード入力をできないように
+    //このメソッドでやっていること
+    //①英語と数字のみもらうように
+    //②桁数の制限をしている
+    //③positionTextFieldのみキーボード入力をできないように
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+//        let characterSet = NSMutableCharacterSet.alphanumeric()
+//        characterSet.addCharacters(in: "_@.")
+        
+        let invalid  : NSCharacterSet = NSCharacterSet(charactersIn:  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-").inverted as NSCharacterSet
+
+        let range = string.rangeOfCharacter(from: invalid as CharacterSet)
+        
         if textField == positionTextField{
             return false
         }
+        else if textField == idTextField{
+                if range != nil {
+                    return false
+                }else if textField.text!.count >= 30{
+                    return false
+                }
+        }else{
+            if range != nil {
+                return false
+            }else if textField.text!.count >= 15{
+                return false
+            }
+        }
         return true
     }
+    
     
 }
