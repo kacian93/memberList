@@ -46,6 +46,7 @@ class JoinMemberController : UIViewController{
     
     var pickerView: UIPickerView!
     var selectedPickerText : String = ""
+    var selectingText : String = ""
     
     var passwordButton = UIButton()
     var repasswordButton = UIButton()
@@ -488,6 +489,7 @@ class JoinMemberController : UIViewController{
     
     //職業のpickerviewに決定をクリックしたら閉じる
     @objc func done(_ sender : UIBarButtonItem) {
+        self.positionTextField.text! =  selectingText 
         selectedPickerText = self.positionTextField.text!
         self.positionTextField.endEditing(true)
     }
@@ -514,7 +516,7 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
     
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.positionTextField.text = positionArray[row]
+        selectingText = positionArray[row]
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
