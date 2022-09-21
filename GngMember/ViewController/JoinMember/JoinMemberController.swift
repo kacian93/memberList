@@ -294,7 +294,7 @@ class JoinMemberController : UIViewController{
     //①内容を消す
     //②閉じる
     @objc func cancel() {
-        self.positionTextField.text = ""
+        self.positionTextField.text = positionArray[0]
         self.positionTextField.endEditing(true)
     }
     
