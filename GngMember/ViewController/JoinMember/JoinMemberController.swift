@@ -28,7 +28,8 @@ class JoinMemberController : UIViewController{
     //職位のText Field
     @IBOutlet var positionTextField: UITextField!
     
-    
+    @IBOutlet var femaleImageView : UIImageView!
+    @IBOutlet var maleImageView: UIImageView!
     @IBOutlet var maleView: UIView!
     @IBOutlet var femaleView: UIView!
     @IBOutlet var genderTitle: UILabel!
@@ -44,6 +45,7 @@ class JoinMemberController : UIViewController{
     var checkboxBool : Bool = true
     
     var pickerView: UIPickerView!
+    var selectedPickerText : String = ""
     
     var passwordButton = UIButton()
     var repasswordButton = UIButton()
@@ -65,6 +67,8 @@ class JoinMemberController : UIViewController{
     var passwordFormatBool : Bool = false
     var repasswordBool : Bool = false
     var repasswordMatchBool : Bool  = false
+    var maleBool : Bool = true
+    var femaleBool : Bool = false
     
     @IBOutlet var innerView: UIView!
     let defaultAction : UIAlertAction = UIAlertAction(title: "直す", style: UIAlertAction.Style.default)
@@ -75,14 +79,14 @@ class JoinMemberController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        maleImageView.image = maleBool ? selectedCircle : circle
+        femaleImageView.image = femaleBool ? selectedCircle : circle
+        
         pickerView = UIPickerView()
         //        scrollView.flashScrollIndicators()
         scrollView.contentSize = CGSize(width: view.frame.width, height: 750)
         //        scrollView.contentOffset.y
         //性別ボタンの基本値
-        maleButton.isSelected = true
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
         
         idTextField.keyboardType = .emailAddress
         passwordTextField.keyboardType = .asciiCapable
@@ -188,7 +192,6 @@ class JoinMemberController : UIViewController{
         let maleGesture = UITapGestureRecognizer(target: self, action:  #selector (self.maleAction (_:)))
         self.maleView.addGestureRecognizer(maleGesture)
         
-        
         let femaleGesture = UITapGestureRecognizer(target: self, action:  #selector (self.femaleAction (_:)))
         self.femaleView.addGestureRecognizer(femaleGesture)
         
@@ -200,47 +203,23 @@ class JoinMemberController : UIViewController{
     //①Bool値を男はTrue、女はFalseに
     //②イメージを切り替える
     @objc func maleAction(_ sender:UITapGestureRecognizer){
+        maleBool = true
+        femaleBool = false
         
-        maleButton.isSelected = true
-        femaleButton.isSelected = false
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
+        maleImageView.image = maleBool ? selectedCircle : circle
+        femaleImageView.image = femaleBool ? selectedCircle : circle
     }
     //性別で女のViewをクリックしたら
     //①Bool値を男はFalse、女はTrueに
     //②イメージを切り替える
     @objc func femaleAction(_ sender:UITapGestureRecognizer){
+        maleBool  = false
+        femaleBool = true
         
-        maleButton.isSelected = false
-        femaleButton.isSelected = true
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
+        maleImageView.image = maleBool ? selectedCircle : circle
+        femaleImageView.image = femaleBool ? selectedCircle : circle
     }
     
-    //性別で男のRadioボタンをクリックしたら
-    //①Bool値を男はTrue、女はFalseに
-    //②イメージを切り替える
-    @IBAction func pushmaleButton(_ sender: Any) {
-        maleButton.isSelected = true
-        femaleButton.isSelected = false
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
-        
-    }
-    
-    //性別で女のRadioボタンをクリックしたら
-    //①Bool値を男はFalse、女はTrueに
-    //②イメージを切り替える
-    @IBAction func pushFemaleButton(_ sender: UIButton) {
-        maleButton.isSelected = false
-        femaleButton.isSelected = true
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
-    }
     
     @IBAction func changeSwitch(_ sender: Any) {
         magazineSwitch.isSelected.toggle()
@@ -290,18 +269,6 @@ class JoinMemberController : UIViewController{
     }
     
     
-    //職業にpickerviewにキャンセルをクリックしたら
-    //①内容を消す
-    //②閉じる
-    @objc func cancel() {
-        self.positionTextField.text = positionArray[0]
-        self.positionTextField.endEditing(true)
-    }
-    
-    //職業のpickerviewに決定をクリックしたら閉じる
-    @objc func done(_ sender : UIBarButtonItem) {
-        self.positionTextField.endEditing(true)
-    }
     //MARK: keyboard関連
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
@@ -309,31 +276,34 @@ class JoinMemberController : UIViewController{
     
     //memoTextViewをクリックした時のみキーボード位置調節
     //MARK: 修正予定
+    
+    
     @objc func keyboardWillShow(notification: NSNotification) {
-        if !memoTextView.isFirstResponder {
-            return
+        //if !memoTextView.isFirstResponder {
+        //    return
+        //}
+        self.scrollView.contentSize = CGSize(
+            width: self.scrollView.frame.width,
+            height: self.innerView.frame.height
+        )
+        
+        if self.memoTextView.isFirstResponder {
+            // 一番下に移動
+            let y = self.innerView.frame.height - self.scrollView.frame.height
+            self.scrollView.contentOffset = CGPoint(x: 0, y: y)
         }
         
-//        if self.view.frame.origin.y == 0 {
-//            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-//
-//                self.view.frame.origin.y += (keyboardRect)
-//            }
-//        }
-        var offset = scrollView.contentOffset
-        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - 60, right: 0)
-            offset.y = keyboardHeight
-//            self.view.frame.origin.y -= (keyboardHeight)
-        }
     }
-    
-    //keyboardではなく他のところをクリックした時、元に戻る
+    //キーボードが隠す時の挙動
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-
-        }
+        self.scrollView.contentSize = CGSize(
+            width: self.scrollView.frame.width,
+            height: self.innerView.frame.height - 250
+        )
+        
+        /*if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }*/
     }
     
     //キーボードでreturnボタンを押せば次のTextfieldに移動する
@@ -506,6 +476,20 @@ class JoinMemberController : UIViewController{
             }
             desti.signupMember = self.signupMember
         }
+    }
+    
+    //職業にpickerviewにキャンセルをクリックしたら
+    //①内容を消す
+    //②閉じる
+    @objc func cancel() {
+        self.positionTextField.text! = selectedPickerText.isEmpty ? positionArray[0] : selectedPickerText
+        self.positionTextField.endEditing(true)
+    }
+    
+    //職業のpickerviewに決定をクリックしたら閉じる
+    @objc func done(_ sender : UIBarButtonItem) {
+        selectedPickerText = self.positionTextField.text!
+        self.positionTextField.endEditing(true)
     }
 }
 
