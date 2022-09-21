@@ -9,11 +9,14 @@ import Foundation
 import WebKit
 
 class GngsWebsiteController:UIViewController{
-    
     @IBOutlet var gngsWebKit: WKWebView!
+    
+    //naviにあるボタン
     @IBOutlet var pageBackButton: UIButton!
     @IBOutlet var pageReloadButton: UIButton!
     @IBOutlet var pageForwardButton: UIButton!
+    
+    //ボタンに使うイメージ
     let backImage : UIImage = UIImage(systemName: "chevron.backward")!
     let forwardImage : UIImage  = UIImage(systemName: "chevron.forward")!
     let relaodImage : UIImage  = UIImage(systemName: "arrow.clockwise")!
@@ -53,6 +56,8 @@ class GngsWebsiteController:UIViewController{
         }
     }
 }
+
+//MARK: --Delegate
 extension GngsWebsiteController : WKNavigationDelegate{
 //    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
 //        

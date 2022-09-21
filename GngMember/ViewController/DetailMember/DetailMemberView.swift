@@ -40,7 +40,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         backButton.tintColor = .white
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemGray5
         self.view.addSubview(view)
         view.addSubview(tableView)
         view.addSubview(backButton)
@@ -63,7 +63,6 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cellview = UIView(frame: CGRect(x: 6, y: 1, width:400, height: 60))
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
         let label2 = cell.contentView.viewWithTag(2) as! UILabel
         
@@ -71,15 +70,9 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         label1.text = detailTitle[indexPath.item]
         label2.text = amember[indexPath.item]
         
-        cellview.addSubview(label1)
-        cellview.addSubview(label2)
-        
-        cellview.backgroundColor = .white
-        
-        cell.backgroundColor = UIColor.lightGray
+        cell.backgroundColor = UIColor.quaternaryLabel
         cell.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         
-        cell.addSubview(cellview)
     }
     @IBAction func clickBackButton(_ sender: UIButton) {
         dismiss(animated: true)

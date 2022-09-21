@@ -107,7 +107,6 @@ class JoinMemberController : UIViewController{
         positionTextField.rightViewMode = .always
         positionTextField.rightView = view
         
-        //password 目メークを押せば見えるように
         let passwordView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         passwordButton = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
         passwordButton.setImage(UIImage(systemName: passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
@@ -117,6 +116,7 @@ class JoinMemberController : UIViewController{
         passwordTextField.rightViewMode = .always
         passwordTextField.rightView = passwordView
         
+        //パスワード（再入力）の 目メークを押せば見えるように
         let repasswordView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         repasswordButton = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
         repasswordButton.setImage(UIImage(systemName: repasswordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
@@ -139,7 +139,7 @@ class JoinMemberController : UIViewController{
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         
-        
+        //magazinSwitchをディフォルト値＝True
         magazineSwitch.isSelected = true
         
         //pickerView追加
@@ -184,7 +184,7 @@ class JoinMemberController : UIViewController{
         
         
         
-        //性別で男をクリックした時
+        //性別でViewをクリックした時
         let maleGesture = UITapGestureRecognizer(target: self, action:  #selector (self.maleAction (_:)))
         self.maleView.addGestureRecognizer(maleGesture)
         
@@ -195,6 +195,10 @@ class JoinMemberController : UIViewController{
     }
     
     //MARK: --Method
+    
+    //性別で男のViewをクリックしたら
+    //①Bool値を男はTrue、女はFalseに
+    //②イメージを切り替える
     @objc func maleAction(_ sender:UITapGestureRecognizer){
         
         maleButton.isSelected = true
@@ -203,6 +207,9 @@ class JoinMemberController : UIViewController{
         femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
         
     }
+    //性別で女のViewをクリックしたら
+    //①Bool値を男はFalse、女はTrueに
+    //②イメージを切り替える
     @objc func femaleAction(_ sender:UITapGestureRecognizer){
         
         maleButton.isSelected = false
@@ -211,9 +218,37 @@ class JoinMemberController : UIViewController{
         femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
         
     }
+    
+    //性別で男のRadioボタンをクリックしたら
+    //①Bool値を男はTrue、女はFalseに
+    //②イメージを切り替える
+    @IBAction func pushmaleButton(_ sender: Any) {
+        maleButton.isSelected = true
+        femaleButton.isSelected = false
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+        
+        
+    }
+    
+    //性別で女のRadioボタンをクリックしたら
+    //①Bool値を男はFalse、女はTrueに
+    //②イメージを切り替える
+    @IBAction func pushFemaleButton(_ sender: UIButton) {
+        maleButton.isSelected = false
+        femaleButton.isSelected = true
+        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
+        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
+        
+    }
+    
     @IBAction func changeSwitch(_ sender: Any) {
         magazineSwitch.isSelected.toggle()
     }
+    
+    //パスワード（再入力）で目マークを押せば
+    //①Passwordが見えるように
+    //②イメージ切り替える
     @objc func showRepassword(){
         
         if repasswordTextField.isSecureTextEntry == true{
@@ -225,6 +260,9 @@ class JoinMemberController : UIViewController{
         
         repasswordButton.setImage(UIImage(systemName: repasswordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
     }
+    //Passwordで目マークを押せば
+    //①Passwordが見えるように
+    //②イメージ切り替える
     @objc func showPassword(){
         if passwordTextField.isSecureTextEntry == true{
             passwordTextField.isSecureTextEntry = false
@@ -235,10 +273,14 @@ class JoinMemberController : UIViewController{
         
         passwordButton.setImage(UIImage(systemName: passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
     }
+    
+    //職業で矢印表示
+    //MARK: 修正予定
     @objc func makePositionArrow(){
         
     }
-    //約款同意
+    //約款同意をクリックしたら
+    //toggle
     @IBAction func checkboxToggle(_ sender: Any) {
         checkboxButton.isSelected.toggle()
         checkboxBool.toggle()
@@ -246,27 +288,17 @@ class JoinMemberController : UIViewController{
         
         checkboxButton.setImage(checkboxButton.isSelected ? checkImage : noneCheckImage, for: .normal)
     }
-    @IBAction func pushmaleButton(_ sender: Any) {
-        maleButton.isSelected = true
-        femaleButton.isSelected = false
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
-        
-    }
-    @IBAction func pushFemaleButton(_ sender: UIButton) {
-        maleButton.isSelected = false
-        femaleButton.isSelected = true
-        maleButton.setImage(maleButton.isSelected ? selectedCircle : circle, for: .normal)
-        femaleButton.setImage(femaleButton.isSelected ? selectedCircle : circle, for: .normal)
-        
-    }
     
+    
+    //職業にpickerviewにキャンセルをクリックしたら
+    //①内容を消す
+    //②閉じる
     @objc func cancel() {
         self.positionTextField.text = ""
         self.positionTextField.endEditing(true)
     }
     
+    //職業のpickerviewに決定をクリックしたら閉じる
     @objc func done(_ sender : UIBarButtonItem) {
         self.positionTextField.endEditing(true)
     }
@@ -274,21 +306,33 @@ class JoinMemberController : UIViewController{
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
+    
+    //memoTextViewをクリックした時のみキーボード位置調節
+    //MARK: 修正予定
     @objc func keyboardWillShow(notification: NSNotification) {
         if !memoTextView.isFirstResponder {
             return
         }
         
-        if self.view.frame.origin.y == 0 {
-            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-                self.view.frame.origin.y -= (keyboardRect - 80)
-            }
+//        if self.view.frame.origin.y == 0 {
+//            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+//
+//                self.view.frame.origin.y += (keyboardRect)
+//            }
+//        }
+        var offset = scrollView.contentOffset
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - 60, right: 0)
+            offset.y = keyboardHeight
+//            self.view.frame.origin.y -= (keyboardHeight)
         }
     }
     
+    //keyboardではなく他のところをクリックした時、元に戻る
     @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
         }
     }
     
@@ -307,7 +351,9 @@ class JoinMemberController : UIViewController{
     
     
     //MARK: validationとエラーメッセージ
+    //MARK: 修正予定
     
+    //エラーメッセージを表示
     func errorMessage(message:  String, view : UIView) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: .default, handler: { _ in
@@ -406,17 +452,17 @@ class JoinMemberController : UIViewController{
             result = false
         }else if passwordFormatBool == false{
             
-                errorMessage(message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", view: passwordTextField)
-        
+            errorMessage(message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", view: passwordTextField)
+            
             result = false
         }else if repasswordBool == false{
             
-                errorMessage(message: "パスワード(再入力)を入力してください。", view: repasswordTextField)
+            errorMessage(message: "パスワード(再入力)を入力してください。", view: repasswordTextField)
             result = false
             
         } else if repasswordMatchBool == false{
             
-                errorMessage(message: "パスワード(再入力)とパスワードが一致しません。", view: repasswordTextField)
+            errorMessage(message: "パスワード(再入力)とパスワードが一致しません。", view: repasswordTextField)
             result = false
         }else if checkboxBool == false{
             errorMessage(message: "約款に同意してください。", view: checkboxButton)
@@ -429,19 +475,22 @@ class JoinMemberController : UIViewController{
     }
     
     @IBAction func joinMemberValidation(_ sender: Any) {
+        
+        //修正予定
         idcheck()
         passwordcheck()
         
-        
+        //修正予定
         let idResult : Bool = idValidation()
         let passwordResult : Bool  = passwordValidation()
         let positionResult : Bool = positionValidation()
         if idResult, passwordResult, checkboxBool , positionResult{
             validationResultBool = true
         }
-        signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleButton.isSelected ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
         
         if validationResultBool {
+            //Validation通過した後、メンバー変数に入れる
+            signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleButton.isSelected ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
             //ページ移動するため。下のprepareとセット
             self.performSegue(withIdentifier: "joinMemberDetail", sender: nil)
         }else{
@@ -494,26 +543,28 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
     //③positionTextFieldのみキーボード入力をできないように
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-//        let characterSet = NSMutableCharacterSet.alphanumeric()
-//        characterSet.addCharacters(in: "_@.")
+        let currStr = textField.text! as NSString
+        let changed = currStr.replacingCharacters(in: range, with: string)
+        //        let characterSet = NSMutableCharacterSet.alphanumeric()
+        //        characterSet.addCharacters(in: "_@.")
         
         let invalid  : NSCharacterSet = NSCharacterSet(charactersIn:  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-").inverted as NSCharacterSet
-
+        
         let range = string.rangeOfCharacter(from: invalid as CharacterSet)
         
         if textField == positionTextField{
             return false
         }
         else if textField == idTextField{
-                if range != nil {
-                    return false
-                }else if textField.text!.count >= 30{
-                    return false
-                }
+            if range != nil {
+                return false
+            }else if changed.count > 64{
+                return false
+            }
         }else{
             if range != nil {
                 return false
-            }else if textField.text!.count >= 15{
+            }else if changed.count > 15{
                 return false
             }
         }

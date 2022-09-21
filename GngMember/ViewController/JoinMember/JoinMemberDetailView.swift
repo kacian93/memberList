@@ -9,13 +9,21 @@ import Foundation
 import UIKit
 class JoinMemberDetailView: UIViewController{
     @IBOutlet var backButton: UIButton!
+    //ID（メールアドレス）
     @IBOutlet var idLabel: UILabel!
+    //職業
     @IBOutlet var positionLabel: UILabel!
+    //性別
     @IBOutlet var genderLabel: UILabel!
+    //メールメガジン受信
     @IBOutlet var megazineLabel: UILabel!
+    //約款同意
     @IBOutlet var agreementLabel: UILabel!
+    //memo
     @IBOutlet var memoLabel: UILabel!
+    //Backボタンのイメージ
     var backImage : UIImage = UIImage(systemName: "xmark")!
+    
     var signupMember : SignupMember = SignupMember()
     
     override func viewDidLoad() {

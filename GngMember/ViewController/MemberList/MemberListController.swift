@@ -32,7 +32,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGray6
         
         //TableCell.xibを登録
         TableCell.register(to: tableView)
