@@ -45,8 +45,11 @@ class JoinMemberController : UIViewController{
     var checkboxBool : Bool = true
     
     var pickerView: UIPickerView!
+    //職業で決定を押す値
     var selectedPickerText : String = ""
+    //職業でrowの変化がある場合の値
     var selectingText : String = ""
+    var selectArrayRow : Int = 0
     
     var passwordButton = UIButton()
     var repasswordButton = UIButton()
@@ -61,13 +64,6 @@ class JoinMemberController : UIViewController{
     @IBOutlet var joinMemberButton: UIButton!
     
     //validation
-    var validationResultBool : Bool = false
-    var idBool : Bool = false
-    var idFormatBool : Bool = false
-    var passwordBool : Bool = false
-    var passwordFormatBool : Bool = false
-    var repasswordBool : Bool = false
-    var repasswordMatchBool : Bool  = false
     var maleBool : Bool = true
     var femaleBool : Bool = false
     
@@ -334,128 +330,93 @@ class JoinMemberController : UIViewController{
         alert.addAction(idAlertAction)
         self.present(alert, animated: true, completion: nil)
     }
-    func idcheck() {
-        
-        if idTextField.text!.isEmpty, idTextField.text! == ""{
-            idBool = false
-            return
-        }else{
-            idBool = true
+    func idcheck() -> ValidationResult {
+        var result : ValidationResult
+        if idTextField.text!.isEmpty{
+            result = .idEmpty
+            return result
         }
         
         let text = idTextField.text!
         
         if text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z]+.[A-Za-z]", options: .regularExpression) == nil{
-            idFormatBool = false
-            return
+            result = .idFormat
+            return result
         }
         
-        idFormatBool = true
+        result = .idOK
+        return result
     }
-    func passwordcheck() {
+    func passwordcheck() -> ValidationResult {
+        var result : ValidationResult
         
-        if passwordTextField.text!.isEmpty, passwordTextField.text! == ""{
-            passwordBool = false
-            return
+        if passwordTextField.text!.isEmpty{
+            result = .passwordEmpty
+            return result
         }
         let text = passwordTextField.text!
-        passwordBool = true
         
         if text.range(of: "^.*(?=^.{8,15}$)(?=.*[0-9])(?=.*[a-zA-Z]).*$", options: .regularExpression) == nil{
-            passwordFormatBool = false
-            return
+            result = .passwordFormat
+            return result
         }
         
-        passwordFormatBool = true
         
         let retext = repasswordTextField.text!
         
         if repasswordTextField.text!.isEmpty{
-            repasswordBool = false
-            return
+            result = .repasswordEmpty
+            return result
         }else if text != retext{
-            repasswordBool = true
-            repasswordMatchBool = false
-            return
+            result = .repasswordMatch
+            return result
         }
-        repasswordBool = true
-        repasswordMatchBool = true
+        result = .passwordOK
+        return result
     }
-    func idValidation() -> Bool {
-        var result  : Bool = false
-        if idBool == false{
+    func idValidation() -> ValidationResult {
+        let result  : ValidationResult = idcheck()
+        if result == .idEmpty{
             errorMessage(message: "IDを入力してください。", view: self.idTextField)
-            result = false
             
-        }else if idFormatBool == false{
+        }else if result == .idFormat{
             errorMessage(message: "メールアドレスを入力してください。", view: self.idTextField)
-            
-            result = false
-        }else{
-            result = true
         }
         return result
+        
     }
-    func positionCheck() -> Bool {
-        var result : Bool = false
-        if positionTextField.text!.isEmpty, positionTextField.text! == ""{
-            result = false
-        }else{
-            result = true
-        }
-        return result
-    }
-    func positionValidation() -> Bool {
-        var result : Bool = false
-        if positionCheck() == false{
-            errorMessage(message: "職業を選択してください。", view: positionTextField)
-            result = false
-        }
-        else{
-            result = true
-        }
-        return result
-    }
-    func passwordValidation() -> Bool {
-        var result  : Bool = false
-        if passwordBool == false{
+    func passwordValidation() -> ValidationResult {
+        let result  : ValidationResult = passwordcheck()
+        if result == .passwordEmpty{
             errorMessage(message: "パスワードを入力してください。", view: passwordTextField)
-            result = false
-        }else if passwordFormatBool == false{
+        }else if result == .passwordFormat{
             
             errorMessage(message: "パスワードは小文字、大文字、数字を混ぜて８桁以上になります。", view: passwordTextField)
             
-            result = false
-        }else if repasswordBool == false{
+        }else if result == .repasswordEmpty{
             
             errorMessage(message: "パスワード(再入力)を入力してください。", view: repasswordTextField)
-            result = false
             
-        } else if repasswordMatchBool == false{
+        } else if result == .repasswordMatch{
             
             errorMessage(message: "パスワード(再入力)とパスワードが一致しません。", view: repasswordTextField)
-            result = false
-        }else if checkboxBool == false{
-            errorMessage(message: "約款に同意してください。", view: checkboxButton)
-            result = false
-        }
-        else{
-            result = true
         }
         return result
     }
-    
+    func confirmcheckbox() -> Bool{
+        if checkboxBool == false{
+            errorMessage(message: "約款に同意してください。", view: checkboxButton)
+        }
+        return checkboxBool
+    }
     @IBAction func joinMemberValidation(_ sender: Any) {
-        
+        var validationResultBool : Bool = false
         //修正予定
-        idcheck()
-        passwordcheck()
+        let idResult : ValidationResult = idValidation()
+        let passwordResult : ValidationResult  = passwordValidation()
+        let checkboxBool : Bool = confirmcheckbox()
         
-        //修正予定
-        let idResult : Bool = idValidation()
-        let passwordResult : Bool  = passwordValidation()
-        let positionResult : Bool = positionValidation()
-        if idResult, passwordResult, checkboxBool , positionResult{
+        if idResult == .idOK, passwordResult == .passwordOK, checkboxBool{
             validationResultBool = true
         }
         
@@ -485,11 +446,15 @@ class JoinMemberController : UIViewController{
     @objc func cancel() {
         self.positionTextField.text! = selectedPickerText.isEmpty ? positionArray[0] : selectedPickerText
         self.positionTextField.endEditing(true)
+        //        pickerView.selectRow(selectArrayRow, inComponent: 0, animated: true)
     }
     
+    @IBAction func pushPositionTextField(_ sender: Any) {
+        pickerView.selectRow(selectArrayRow, inComponent: 0, animated: true)
+    }
     //職業のpickerviewに決定をクリックしたら閉じる
     @objc func done(_ sender : UIBarButtonItem) {
-        self.positionTextField.text! =  selectingText 
+        self.positionTextField.text! =  selectingText
         selectedPickerText = self.positionTextField.text!
         self.positionTextField.endEditing(true)
     }
@@ -513,11 +478,14 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return positionArray[row]
     }
-    
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectingText = positionArray[row]
+        selectArrayRow = row
+        
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -557,5 +525,18 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
         return true
     }
     
+    
+}
+enum ValidationResult {
+    
+    case validationResult
+    case idEmpty
+    case idFormat
+    case passwordEmpty
+    case passwordFormat
+    case repasswordEmpty
+    case repasswordMatch
+    case idOK
+    case passwordOK
     
 }

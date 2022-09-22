@@ -37,7 +37,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         amember.append(CSVLoad().fromDatetoString(date: member.dateOfEmployee))
         
         memberInfoTitleLabel.text = "社員情報"
-        backButton.tintColor = .white
+        backButton.tintColor = .systemGray
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         view.backgroundColor = .systemGray5
@@ -45,7 +45,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         view.addSubview(tableView)
         view.addSubview(backButton)
         view.addSubview(memberInfoTitleLabel)
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .systemGray5
         }
     
     
@@ -70,7 +70,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         label1.text = detailTitle[indexPath.item]
         label2.text = amember[indexPath.item]
         
-        cell.backgroundColor = UIColor.quaternaryLabel
+        cell.backgroundColor = UIColor.systemGray4
         cell.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         
     }
