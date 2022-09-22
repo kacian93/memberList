@@ -283,8 +283,6 @@ class JoinMemberController : UIViewController{
         //se3世代ーメモに一度クリックしたら元のスクロールビューが縮小される
          
          // キーボードのframeを調べる。
-         let userInfo = notification.userInfo
-         let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
          
          //        let keyboardFrame : CGFloat = 0
          self.scrollView.contentSize = CGSize(
