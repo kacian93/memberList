@@ -280,21 +280,31 @@ class JoinMemberController : UIViewController{
         //            return
         //        }
         // キーボードのframeを調べる。
-        let userInfo = notification.userInfo
-        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+//        let userInfo = notification.userInfo
+//        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+//        
+//        self.scrollView.contentSize = CGSize(
+//                 width: self.scrollView.frame.width,
+//                 height: self.innerView.frame.height + keyboardFrame
+//             )
+//             
+//             if self.memoTextView.isFirstResponder {
+//                 // 一番下に移動
+//                 let y = self.innerView.frame.height - self.scrollView.frame.height + keyboardFrame - 40
+//                 self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+//             }
         
+        //iphone11
         self.scrollView.contentSize = CGSize(
-                 width: self.scrollView.frame.width,
-                 height: self.innerView.frame.height + keyboardFrame
-             )
-             
-             if self.memoTextView.isFirstResponder {
-                 // 一番下に移動
-                 let y = self.innerView.frame.height - self.scrollView.frame.height + keyboardFrame - 40
-                 self.scrollView.contentOffset = CGPoint(x: 0, y: y)
-             }
+            width: self.scrollView.frame.width,
+            height: self.innerView.frame.height
+        )
         
-        
+        if self.memoTextView.isFirstResponder {
+            // 一番下に移動
+            let y = self.innerView.frame.height - self.scrollView.frame.height + 20
+            self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+        }
         
     }
     //キーボードが隠す時の挙動
