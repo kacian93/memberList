@@ -279,43 +279,83 @@ class JoinMemberController : UIViewController{
         //        if !memoTextView.isFirstResponder {
         //            return
         //        }
-        // キーボードのframeを調べる。
-//        let userInfo = notification.userInfo
-//        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
-//        
-//        self.scrollView.contentSize = CGSize(
-//                 width: self.scrollView.frame.width,
-//                 height: self.innerView.frame.height + keyboardFrame
-//             )
-//             
-//             if self.memoTextView.isFirstResponder {
-//                 // 一番下に移動
-//                 let y = self.innerView.frame.height - self.scrollView.frame.height + keyboardFrame - 40
-//                 self.scrollView.contentOffset = CGPoint(x: 0, y: y)
-//             }
+        //case iphone11ーok
+        //se3世代ーメモに一度クリックしたら元のスクロールビューが縮小される
+         
+         // キーボードのframeを調べる。
+         let userInfo = notification.userInfo
+         let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+         
+         //        let keyboardFrame : CGFloat = 0
+         self.scrollView.contentSize = CGSize(
+         width: self.scrollView.frame.width,
+         height: self.innerView.frame.height
+         )
+         
+         if self.memoTextView.isFirstResponder {
+         // 一番下に移動
+         let y = self.innerView.frame.height - self.scrollView.frame.height + 20
+         self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+         }
+         
         
-        //iphone11
-        self.scrollView.contentSize = CGSize(
-            width: self.scrollView.frame.width,
-            height: self.innerView.frame.height
-        )
         
-        if self.memoTextView.isFirstResponder {
-            // 一番下に移動
-            let y = self.innerView.frame.height - self.scrollView.frame.height + 20
-            self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+        //case iphoneSE2-メモにクリックしたらクリック中には真下まで行けない
+        //iphone11-メモの真下まで行ける
+        //        let userInfo = notification.userInfo
+        //        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        //                self.scrollView.contentSize = CGSize(
+        //                    width: self.scrollView.frame.width,
+        //                    height: self.innerView.frame.height
+        //                )
+        //
+        //                if self.memoTextView.isFirstResponder {
+        //                    // 一番下に移動
+        //                    let y = self.innerView.frame.height - self.scrollView.frame.height + 20 + keyboardFrame
+        //                    self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+        //                }
+        
+        let isiPhoneSE = self.view.safeAreaInsets.bottom <= 80
+        
+        if isiPhoneSE{
+            
+            let userInfo = notification.userInfo
+            let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+            self.scrollView.contentSize = CGSize(
+                width: self.scrollView.frame.width,
+                height: 750 + keyboardFrame
+            )
+            
+            if self.memoTextView.isFirstResponder {
+                // 一番下に移動
+                let y = self.innerView.frame.height - self.scrollView.frame.height + 20 + keyboardFrame
+                self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+            }
         }
-        
     }
     //キーボードが隠す時の挙動
     @objc func keyboardWillHide(notification: NSNotification) {
         self.scrollView.contentSize = CGSize(
             width: self.scrollView.frame.width,
-            height: self.innerView.frame.height
+            //case iphone11-ok
+            //SE3世代ー元のサイズが縮小される
+            //            height: self.innerView.frame.height - 200
+            
+            
+            //case se3-元のサイズの戻る
+            //iphone11ではスクロールビューが伸びる
+            height: 750
         )
         /*if self.view.frame.origin.y != 0 {
          self.view.frame.origin.y = 0
          }*/
+        
+        //        let userInfo = notification.userInfo
+        //        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        
+        //case3 下記コードをなしに
+        //        let y = self.innerView.frame.height - self.scrollView.frame.height + 20
+        //        self.scrollView.contentOffset = CGPoint(x: 0, y: y)
     }
     
     //キーボードでreturnボタンを押せば次のTextfieldに移動する
