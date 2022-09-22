@@ -81,7 +81,7 @@ class JoinMemberController : UIViewController{
         
         pickerView = UIPickerView()
         //        scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 750)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 730)
         //        scrollView.contentOffset.y
         //性別ボタンの基本値
         
@@ -233,7 +233,7 @@ class JoinMemberController : UIViewController{
         }else{
             repasswordTextField.isSecureTextEntry=true
         }
-        
+        repasswordTextField.becomeFirstResponder()
         repasswordButton.setImage(UIImage(systemName: repasswordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
     }
     //Passwordで目マークを押せば
@@ -246,7 +246,7 @@ class JoinMemberController : UIViewController{
         }else{
             passwordTextField.isSecureTextEntry=true
         }
-        
+        passwordTextField.becomeFirstResponder()
         passwordButton.setImage(UIImage(systemName: passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"), for: .normal)
     }
     
@@ -276,9 +276,9 @@ class JoinMemberController : UIViewController{
     
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        //if !memoTextView.isFirstResponder {
-        //    return
-        //}
+//        if !memoTextView.isFirstResponder {
+//            return
+//        }
         self.scrollView.contentSize = CGSize(
             width: self.scrollView.frame.width,
             height: self.innerView.frame.height
@@ -287,7 +287,7 @@ class JoinMemberController : UIViewController{
         if self.memoTextView.isFirstResponder {
             // 一番下に移動
             let y = self.innerView.frame.height - self.scrollView.frame.height
-            self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+            self.scrollView.contentOffset = CGPoint(x: 0, y: y + 180)
         }
         
     }
@@ -295,8 +295,11 @@ class JoinMemberController : UIViewController{
     @objc func keyboardWillHide(notification: NSNotification) {
         self.scrollView.contentSize = CGSize(
             width: self.scrollView.frame.width,
-            height: self.innerView.frame.height - 250
+            height: self.innerView.frame.height
         )
+        let y = self.innerView.frame.height - self.scrollView.frame.height
+        
+        self.scrollView.contentOffset = CGPoint(x: 0, y: y)
         
         /*if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -450,7 +453,26 @@ class JoinMemberController : UIViewController{
     }
     
     @IBAction func pushPositionTextField(_ sender: Any) {
-        pickerView.selectRow(selectArrayRow, inComponent: 0, animated: true)
+        var selectedRow : Int
+        
+        switch selectedPickerText{
+        case positionArray[0]:
+            selectedRow = 0
+        case positionArray[1]:
+            selectedRow = 1
+        case positionArray[2]:
+            selectedRow = 2
+        case positionArray[3]:
+            selectedRow = 3
+        case positionArray[4]:
+            selectedRow = 4
+        case positionArray[5]:
+            selectedRow = 5
+        default:
+            selectedRow = 0
+        }
+        
+        pickerView.selectRow(selectedRow, inComponent: 0, animated: true)
     }
     //職業のpickerviewに決定をクリックしたら閉じる
     @objc func done(_ sender : UIBarButtonItem) {
@@ -527,6 +549,7 @@ extension JoinMemberController : UIPickerViewDelegate,UIPickerViewDataSource , U
     
     
 }
+//MARK: --enum ValidationResult
 enum ValidationResult {
     
     case validationResult

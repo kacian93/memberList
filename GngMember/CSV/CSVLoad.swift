@@ -64,4 +64,25 @@ class CSVLoad{
           
         return dateFormatter.string(from: date)
     }
+    
+    
+    
+    //CSVファイル保存メソッド
+//    func saveCSV() {
+//
+//        //改行区切りで部活配列を連結する。
+//        let outputStr = dataList.joinWithSeparator("\n")
+//
+//        do {
+//            if(outputStr == "") {
+//                //部活配列が空の場合はユーザーが保存したCSVファイルを削除する。
+//                try fileManager.removeItemAtPath(userPath)
+//            } else {
+//                //ファイルを出力する。
+//                try outputStr.writeToFile(userPath, atomically: false, encoding: NSUTF8StringEncoding )
+//            }
+//        } catch {
+//            print(error)
+//        }
+//    }
 }
