@@ -276,19 +276,25 @@ class JoinMemberController : UIViewController{
     
     
     @objc func keyboardWillShow(notification: NSNotification) {
-//        if !memoTextView.isFirstResponder {
-//            return
-//        }
-        self.scrollView.contentSize = CGSize(
-            width: self.scrollView.frame.width,
-            height: self.innerView.frame.height
-        )
+        //        if !memoTextView.isFirstResponder {
+        //            return
+        //        }
+        // キーボードのframeを調べる。
+        let userInfo = notification.userInfo
+        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
         
-        if self.memoTextView.isFirstResponder {
-            // 一番下に移動
-            let y = self.innerView.frame.height - self.scrollView.frame.height
-            self.scrollView.contentOffset = CGPoint(x: 0, y: y + 180)
-        }
+        self.scrollView.contentSize = CGSize(
+                 width: self.scrollView.frame.width,
+                 height: self.innerView.frame.height + keyboardFrame
+             )
+             
+             if self.memoTextView.isFirstResponder {
+                 // 一番下に移動
+                 let y = self.innerView.frame.height - self.scrollView.frame.height + keyboardFrame - 40
+                 self.scrollView.contentOffset = CGPoint(x: 0, y: y)
+             }
+        
+        
         
     }
     //キーボードが隠す時の挙動
@@ -297,13 +303,9 @@ class JoinMemberController : UIViewController{
             width: self.scrollView.frame.width,
             height: self.innerView.frame.height
         )
-        let y = self.innerView.frame.height - self.scrollView.frame.height
-        
-        self.scrollView.contentOffset = CGPoint(x: 0, y: y)
-        
         /*if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }*/
+         self.view.frame.origin.y = 0
+         }*/
     }
     
     //キーボードでreturnボタンを押せば次のTextfieldに移動する
