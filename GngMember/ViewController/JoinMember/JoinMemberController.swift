@@ -475,7 +475,7 @@ class JoinMemberController : UIViewController{
         
         if validationResultBool {
             //Validation通過した後、メンバー変数に入れる
-            signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleButton.isSelected ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
+            signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleBool ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
             //ページ移動するため。下のprepareとセット
             self.performSegue(withIdentifier: "joinMemberDetail", sender: nil)
         }else{

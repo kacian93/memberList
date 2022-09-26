@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WebKit
 class CSVLoad{
     @Published var csvMemberArray : [Member] = []
     var csvStringArray : [String] = []
@@ -42,6 +43,25 @@ class CSVLoad{
         return csvMemberArray
     }
     
+    
+    func writeCsv(filename: String, member: Member) -> Void  {
+        guard let filepath = Bundle.main.path(forResource: (filename), ofType: "csv") else { return }
+        guard let file = FileHandle(forWritingAtPath: filepath) else{
+            return
+        }
+        
+        let memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
+
+        let contentdata = memberInfomation.data(using: .utf8)
+        do{
+            try file.seekToEnd()
+            file.write(contentdata!)
+            file.closeFile()
+        }catch{
+            print("csv writing error")
+        }
+       
+    }
     /// 入社日がDate形式なのでStringをDate軽視に変わる関数
     /// - Parameter date:　入社日のStringタイプ（CSVファイルがString）
     /// - Returns:クラスのMemberの入社日はDateなのでDate

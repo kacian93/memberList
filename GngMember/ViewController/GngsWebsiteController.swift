@@ -29,6 +29,8 @@ class GngsWebsiteController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //        tabBarController?.tabBar.isHidden = true
+        gngsWebKit.frame = CGRect(x: 0, y: 0, width: outterview.bounds.width, height: outterview.bounds.height - (tabBarController?.tabBar.bounds.height ?? 0) * 2)
+        buttonUIView.frame = CGRect(x: 0, y: gngsWebKit.bounds.height, width: gngsWebKit.bounds.width, height: tabBarController?.tabBar.bounds.height ?? 0)
         
         let url = URL(string: "https://gngs.co.jp/")
         let request = URLRequest(url: url!)
@@ -117,25 +119,33 @@ extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UI
 //        (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
 //    }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
         if (self.lastContentOffset > scrollView.contentOffset.y) {
             // move up
             
             
-            tabBarController?.tabBar.isHidden = true
-            buttonUIView.frame = CGRect(x: 0, y: outterview.bounds.height - 47, width: gngsWebKit.bounds.width, height: 47)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tabBarController?.tabBar.isHidden = true
+                self.buttonUIView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) , width: self.gngsWebKit.bounds.width, height: 47)
+                self.gngsWebKit.frame = CGRect(x: 0, y: 0, width: self.outterview.bounds.width, height: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0))
+                
+            })
         }
         else if (self.lastContentOffset < scrollView.contentOffset.y) {
            // move down
-            tabBarController?.tabBar.isHidden = false
-            buttonUIView.frame = CGRect(x: 0, y: outterview.bounds.height - 94  , width: gngsWebKit.bounds.width, height: 47)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tabBarController?.tabBar.isHidden = false
+                self.buttonUIView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) * 2  , width: self.gngsWebKit.bounds.width, height: 47)
+                self.gngsWebKit.frame = CGRect(x: 0, y: 0, width: self.outterview.bounds.width, height: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) * 2)
+                
+            })
         }
 
         // update the new position acquired
         self.lastContentOffset = scrollView.contentOffset.y
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            print("didFinish")
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { 
         
         pageBackButton.tintColor =
         (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
@@ -149,36 +159,36 @@ extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UI
     }
 
 }
-final class SingleScrollAndLongPressRecognizer : UIGestureRecognizer{
-    var startLocation : CGPoint = .zero
-    var distance : CGFloat  = .zero
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        if self.state == .possible{
-            self.startLocation = touches.first?.location(in: nil) ?? .zero
-            self.state = .began
-        }
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = .cancelled
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = .changed
-        let location = touches.first?.location(in: nil) ?? .zero
-        let dx = startLocation.x - location.x
-        let dy  = startLocation.y - location.y
-        self.distance = sqrt(dx*dx + dy*dy)
-    }
-
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = .ended
-        self.startLocation = .zero
-        self.distance = .zero
-    }
-}
+//final class SingleScrollAndLongPressRecognizer : UIGestureRecognizer{
+//    var startLocation : CGPoint = .zero
+//    var distance : CGFloat  = .zero
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+//        if self.state == .possible{
+//            self.startLocation = touches.first?.location(in: nil) ?? .zero
+//            self.state = .began
+//        }
+//    }
+//
+//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+//        self.state = .cancelled
+//    }
+//
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+//        self.state = .changed
+//        let location = touches.first?.location(in: nil) ?? .zero
+//        let dx = startLocation.x - location.x
+//        let dy  = startLocation.y - location.y
+//        self.distance = sqrt(dx*dx + dy*dy)
+//    }
+//
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+//        self.state = .ended
+//        self.startLocation = .zero
+//        self.distance = .zero
+//    }
+//}
 //
 //
 //class Coordinator : NSObject, UIGestureRecognizerDelegate{

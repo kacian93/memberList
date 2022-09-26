@@ -76,5 +76,6 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
     }
     @IBAction func clickBackButton(_ sender: UIButton) {
         dismiss(animated: true)
+        
     }
 }

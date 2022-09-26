@@ -24,6 +24,9 @@ class JoinMemberDetailView: UIViewController{
     //Backボタンのイメージ
     var backImage : UIImage = UIImage(systemName: "xmark")!
     
+    var csvLoad : CSVLoad = CSVLoad()
+    
+    @IBOutlet var OKbutton: UIButton!
     var signupMember : SignupMember = SignupMember()
     
     override func viewDidLoad() {
@@ -39,5 +42,12 @@ class JoinMemberDetailView: UIViewController{
     }
     @IBAction func pushBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func pushOkButton(_ sender: Any) {
+        let member : Member = Member(emloyeeNumber: "01-11111111", kanjiName: "default", kanaName: "default", englishName: "default", gender: "male", password: signupMember.password, position: signupMember.position, affiliation: "第１チーム", email: signupMember.id, tel: "defualt", dateOfEmployee: Date.now, receivedMagazine: signupMember.megazine)
+        
+        csvLoad.writeCsv(filename: "GngsMember", member: member)
+        dismiss(animated: true)
     }
 }

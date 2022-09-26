@@ -27,7 +27,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZT-NN-V2Y" userLabel="buttonView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZT-NN-V2Y">
                                 <rect key="frame" x="0.0" y="571" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -40,15 +40,6 @@
                                             <action selector="pushBackButton:" destination="1ur-ro-JTP" eventType="touchUpInside" id="o28-3K-eEc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-Wa-b3y">
-                                        <rect key="frame" x="175" y="18" width="24" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title=""/>
-                                        <connections>
-                                            <action selector="pushForwardButton:" destination="1ur-ro-JTP" eventType="touchUpInside" id="AyV-TM-foy"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9a-Pw-ENO">
                                         <rect key="frame" x="305" y="18" width="24" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -56,6 +47,15 @@
                                         <buttonConfiguration key="configuration" style="plain" title=""/>
                                         <connections>
                                             <action selector="pushReloadButton:" destination="1ur-ro-JTP" eventType="touchUpInside" id="f6D-1q-kph"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-Wa-b3y">
+                                        <rect key="frame" x="175" y="17" width="24" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                                        <connections>
+                                            <action selector="pushForwardButton:" destination="1ur-ro-JTP" eventType="touchUpInside" id="AyV-TM-foy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -69,7 +69,7 @@
                         <color key="badgeColor" systemColor="labelColor"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="buttonUIView" destination="vZT-NN-V2Y" id="INw-Ov-axC"/>
+                        <outlet property="buttonUIView" destination="vZT-NN-V2Y" id="Ied-bQ-khw"/>
                         <outlet property="gngsWebKit" destination="AS5-yh-kcE" id="aOb-83-wNd"/>
                         <outlet property="outterview" destination="mZZ-qd-zHV" id="uoJ-yQ-ypD"/>
                         <outlet property="pageBackButton" destination="72U-Bs-HUB" id="hIH-h6-IDL"/>
@@ -254,6 +254,7 @@
                     <tabBarItem key="tabBarItem" title="社員一覧" image="person.fill" catalog="system" selectedImage="person.fill" id="N5k-80-F6C">
                         <color key="badgeColor" systemColor="labelColor"/>
                     </tabBarItem>
+                    <navigationItem key="navigationItem" id="eq1-dJ-Pw4"/>
                     <connections>
                         <outlet property="affiliation" destination="uO3-1w-p8T" id="bv5-L3-Qp9"/>
                         <outlet property="memberListTitle" destination="Gbj-Ql-UmW" id="NVS-bd-wXk"/>
@@ -717,11 +718,21 @@
                                     <action selector="pushBackButton:" destination="JDK-lX-09q" eventType="touchUpInside" id="IVV-ze-FJt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ3-WS-vQk">
+                                <rect key="frame" x="20" y="430" width="335" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="確認"/>
+                                <connections>
+                                    <action selector="pushOkButton:" destination="JDK-lX-09q" eventType="touchUpInside" id="UCT-Ux-K8C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kr1-YL-OYt"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                     </view>
                     <connections>
+                        <outlet property="OKbutton" destination="sZ3-WS-vQk" id="26q-vG-7yz"/>
                         <outlet property="agreementLabel" destination="FG4-7w-eCB" id="nDp-e1-oVT"/>
                         <outlet property="backButton" destination="9p3-nc-cid" id="XXS-vG-VHR"/>
                         <outlet property="genderLabel" destination="wIv-u7-d7q" id="W2S-Uo-rby"/>

@@ -11,7 +11,7 @@ import UIKit
 class MemberListController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     //MARK: --変数
     //CSVファイルを読んで配列に入れいる
-    var csvMember : [Member] = CSVLoad().loadCSV(filename: "GngsMember")
+    var csvMember : [Member] = []
     @IBOutlet var tableTitle: UITableViewCell!
     
     //社員一覧のTableView
@@ -33,7 +33,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemGray6
-        
+        csvMember = CSVLoad().loadCSV(filename: "GngsMember")
         //TableCell.xibを登録
         TableCell.register(to: tableView)
         self.tableView.delegate = self
