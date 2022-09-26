@@ -17,7 +17,9 @@ class TabBarController : UITabBarController{
         appearance.backgroundColor = UIColor.quaternaryLabel
         
         appearance.stackedItemWidth = view.frame.width/3
-    
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
         
         myTabBar.standardAppearance = appearance
         myTabBar.scrollEdgeAppearance = appearance

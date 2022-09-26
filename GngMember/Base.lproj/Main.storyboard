@@ -13,7 +13,7 @@
         <!--WebView-->
         <scene sceneID="Ws6-61-52s">
             <objects>
-                <viewController id="1ur-ro-JTP" customClass="GngsWebsiteController" customModule="GngMember" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1ur-ro-JTP" customClass="GngsWebsiteController" customModule="GngMember" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mZZ-qd-zHV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZT-NN-V2Y">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZT-NN-V2Y" userLabel="buttonView">
                                 <rect key="frame" x="0.0" y="571" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -69,7 +69,9 @@
                         <color key="badgeColor" systemColor="labelColor"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="buttonUIView" destination="vZT-NN-V2Y" id="INw-Ov-axC"/>
                         <outlet property="gngsWebKit" destination="AS5-yh-kcE" id="aOb-83-wNd"/>
+                        <outlet property="outterview" destination="mZZ-qd-zHV" id="uoJ-yQ-ypD"/>
                         <outlet property="pageBackButton" destination="72U-Bs-HUB" id="hIH-h6-IDL"/>
                         <outlet property="pageForwardButton" destination="9GG-Wa-b3y" id="cwb-Fq-ZiD"/>
                         <outlet property="pageReloadButton" destination="Y9a-Pw-ENO" id="Q9g-Jo-yoD"/>

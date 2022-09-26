@@ -70,7 +70,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         label1.text = detailTitle[indexPath.item]
         label2.text = amember[indexPath.item]
         
-        cell.backgroundColor = UIColor.systemGray4
+        cell.backgroundColor = UIColor.systemGray6
         cell.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         
     }
