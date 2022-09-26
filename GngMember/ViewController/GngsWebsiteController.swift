@@ -122,12 +122,12 @@ extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UI
             
             
             tabBarController?.tabBar.isHidden = true
-            buttonUIView.frame = CGRect(x: 0, y: gngsWebKit.bounds.height + 47 , width: gngsWebKit.bounds.width, height: 47)
+            buttonUIView.frame = CGRect(x: 0, y: outterview.bounds.height - 47, width: gngsWebKit.bounds.width, height: 47)
         }
         else if (self.lastContentOffset < scrollView.contentOffset.y) {
            // move down
             tabBarController?.tabBar.isHidden = false
-            buttonUIView.frame = CGRect(x: 0, y: gngsWebKit.bounds.height  , width: gngsWebKit.bounds.width, height: 47)
+            buttonUIView.frame = CGRect(x: 0, y: outterview.bounds.height - 94  , width: gngsWebKit.bounds.width, height: 47)
         }
 
         // update the new position acquired
