@@ -392,7 +392,7 @@ class JoinMemberController : UIViewController{
         
         let text = idTextField.text!
         
-        if text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z]+.[A-Za-z]", options: .regularExpression) == nil{
+        if text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z]+.[A-Za-z]{2,3}", options: .regularExpression) == nil{
             result = .idFormat
             return result
         }
@@ -433,7 +433,7 @@ class JoinMemberController : UIViewController{
             errorMessage(message: "IDを入力してください。", view: self.idTextField)
             
         }else if result == .idFormat{
-            errorMessage(message: "メールアドレスを入力してください。", view: self.idTextField)
+            errorMessage(message: "IDはメールアドレスです。\nメールアドレスを入力してください。", view: self.idTextField)
         }
         return result
         

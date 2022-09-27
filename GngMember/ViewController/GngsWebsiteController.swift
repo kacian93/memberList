@@ -11,7 +11,7 @@ import WebKit
 class GngsWebsiteController:UIViewController{
     @IBOutlet var gngsWebKit: WKWebView!
     //naviにあるボタン
-    @IBOutlet var buttonUIView: UIView!
+    @IBOutlet var naviView: UIView!
     @IBOutlet var outterview: UIView!
     @IBOutlet var pageBackButton: UIButton!
     @IBOutlet var pageReloadButton: UIButton!
@@ -29,8 +29,8 @@ class GngsWebsiteController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //        tabBarController?.tabBar.isHidden = true
-        gngsWebKit.frame = CGRect(x: 0, y: 0, width: outterview.bounds.width, height: outterview.bounds.height - (tabBarController?.tabBar.bounds.height ?? 0) * 2)
-        buttonUIView.frame = CGRect(x: 0, y: gngsWebKit.bounds.height, width: gngsWebKit.bounds.width, height: tabBarController?.tabBar.bounds.height ?? 0)
+//        gngsWebKit.frame = CGRect(x: 0, y: 0, width: outterview.bounds.width, height: outterview.bounds.height - (tabBarController?.tabBar.bounds.height ?? 0) * 2)
+//        naviView.frame = CGRect(x: 0, y: gngsWebKit.bounds.height, width: gngsWebKit.bounds.width, height: tabBarController?.tabBar.bounds.height ?? 0)
         
         let url = URL(string: "https://gngs.co.jp/")
         let request = URLRequest(url: url!)
@@ -50,16 +50,25 @@ class GngsWebsiteController:UIViewController{
         
         gngsWebKit.navigationDelegate = self
         gngsWebKit.scrollView.delegate = self
-//        let menuInteraction: UIContextMenuInteraction = UIContextMenuInteraction(delegate: self)
-        
-        
-        let pushWholeViewGesture = UIGestureRecognizer(target: self, action: #selector(pushWholeView))
-        self.gngsWebKit.addGestureRecognizer(pushWholeViewGesture)
+//        let menuInteraction: UIContextMenuInteraction = UIContextMenuInteraction(delegate: self
         
     }
-    @objc func pushWholeView() {
-        
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
     }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+//        self.gngsWebKit.translatesAutoresizingMaskIntoConstraints  = false
+//        [
+//        self.gngsWebKit.topAnchor.constraint(equalTo: self.view.topAnchor),
+//        self.gngsWebKit.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+//        self.gngsWebKit.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+//        self.gngsWebKit.bottomAnchor.constraint(equalTo: self.naviView.bottomAnchor),
+//        ].forEach{ $0.isActive = true }
+    }
+    
     @IBAction func pushReloadButton(_ sender: Any) {
         self.gngsWebKit.reload()
     }
@@ -79,9 +88,38 @@ enum ScrollAnimation{
     case downScrolling
 }
 //MARK: --Delegate
-extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate{
+extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate{
+    
+
     
     
+//    func webView(webView: WKWebView, shouldStartLoadWithRequest
+//        request: NSURLRequest,
+//                 navigationType: ) -> Bool {
+//
+//        if let scheme = request.url?.scheme {
+//
+//            if scheme.hasPrefix("http") || scheme.hasPrefix("https") {
+//
+//                //ページ内アンカー移動
+//                let anchor = request.url?.absoluteString.components(separatedBy: "#")
+//
+//                if anchor?.count ?? 0 > 1 {
+////                    self.webView.stringByEvaluatingJavaScript(from: "window.location.hash = \"\(anchor?.first)\"")
+//
+//                    pageBackButton.tintColor =
+//                    (gngsWebKit.canGoBack ? UIColor.blue : UIColor.gray)
+//
+//
+//                    pageForwardButton.tintColor =
+//                    (gngsWebKit.canGoForward ? UIColor.blue : UIColor.gray)
+//                }
+//                return true
+//
+//            }
+//        }
+//        return false
+//    }
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return transitionDuration
     }
@@ -126,7 +164,7 @@ extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UI
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.tabBarController?.tabBar.isHidden = true
-                self.buttonUIView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) , width: self.gngsWebKit.bounds.width, height: 47)
+                self.naviView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) , width: self.gngsWebKit.bounds.width, height: 47)
                 self.gngsWebKit.frame = CGRect(x: 0, y: 0, width: self.outterview.bounds.width, height: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0))
                 
             })
@@ -135,7 +173,7 @@ extension GngsWebsiteController : WKNavigationDelegate, UIScrollViewDelegate, UI
            // move down
             UIView.animate(withDuration: 0.5, animations: {
                 self.tabBarController?.tabBar.isHidden = false
-                self.buttonUIView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) * 2  , width: self.gngsWebKit.bounds.width, height: 47)
+                self.naviView.frame = CGRect(x: 0, y: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) * 2  , width: self.gngsWebKit.bounds.width, height: 47)
                 self.gngsWebKit.frame = CGRect(x: 0, y: 0, width: self.outterview.bounds.width, height: self.outterview.bounds.height - (self.tabBarController?.tabBar.bounds.height ?? 0) * 2)
                 
             })

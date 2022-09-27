@@ -13,7 +13,6 @@
 		9F490BD028C58A3100F976FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCF28C58A3100F976FA /* SceneDelegate.swift */; };
 		9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BD128C58A3100F976FA /* MemberListController.swift */; };
 		9F490BD528C58A3100F976FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BD328C58A3100F976FA /* Main.storyboard */; };
-		9F490BD728C58A3200F976FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BD628C58A3200F976FA /* Assets.xcassets */; };
 		9F490BDA28C58A3200F976FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BD828C58A3200F976FA /* LaunchScreen.storyboard */; };
 		9F490BE428C5996100F976FA /* CSVLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BE228C5996100F976FA /* CSVLoad.swift */; };
 		9F490BE528C5996100F976FA /* GngsMember.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BE328C5996100F976FA /* GngsMember.csv */; };
@@ -24,6 +23,7 @@
 		9F490BF628C5F9D300F976FA /* GngsWebsiteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BF528C5F9D300F976FA /* GngsWebsiteController.swift */; };
 		9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BFA28C8A42000F976FA /* TableCell.xib */; };
 		9F490BFD28C8A52E00F976FA /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BFC28C8A52E00F976FA /* TableCell.swift */; };
+		9F4AEA2E28E1A81600C201EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F490BD628C58A3200F976FA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,10 +207,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F490BDA28C58A3200F976FA /* LaunchScreen.storyboard in Resources */,
-				9F490BD728C58A3200F976FA /* Assets.xcassets in Resources */,
 				9F490BFB28C8A42000F976FA /* TableCell.xib in Resources */,
 				9F490BD528C58A3100F976FA /* Main.storyboard in Resources */,
 				9F490BE528C5996100F976FA /* GngsMember.csv in Resources */,
+				9F4AEA2E28E1A81600C201EE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N6ZS427PKR;
@@ -397,7 +398,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -406,6 +407,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N6ZS427PKR;
@@ -426,7 +428,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
