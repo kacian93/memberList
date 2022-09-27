@@ -60,7 +60,6 @@ class CSVLoad{
 //        }catch{
 //            print("csv writing error")
 //        }
-       
         guard let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 fatalError("フォルダURL取得エラー")
             }
@@ -69,7 +68,9 @@ class CSVLoad{
         
                 let memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
             do {
+                
                 try memberInfomation.write(to: fileURL, atomically: true, encoding: .utf8)
+                
             } catch {
                 print("failed to write: \(error)")
             }
