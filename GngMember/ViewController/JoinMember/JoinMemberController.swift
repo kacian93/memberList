@@ -99,7 +99,7 @@ class JoinMemberController : UIViewController{
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let button = UIButton(frame: CGRect(x: 5, y: 5, width: 20, height: 20))
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .systemGray2
         button.layer.cornerRadius = button.frame.width / 2
         //ボタンに処理を追加
         button.addTarget(self, action: #selector(makePositionArrow), for: .touchUpInside)
@@ -131,6 +131,7 @@ class JoinMemberController : UIViewController{
         
         //pickerviewのキャンセル、決定ボタンのため
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 35))
+        toolbar.sizeToFit()
         let doneItem = UIBarButtonItem(title: "決定", style: .done, target: self, action: #selector(JoinMemberController.done))
         let cancelItem = UIBarButtonItem(title: "キャンセル", style: .plain, target: self, action: #selector(JoinMemberController.cancel))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -392,7 +393,7 @@ class JoinMemberController : UIViewController{
         
         let text = idTextField.text!
         
-        if text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z]+.[A-Za-z]{2,3}", options: .regularExpression) == nil{
+        if text.range(of: "[a-zA-Z0-9._%+-]+@[a-zA-Z]+.[a-zA-Z]{2,3}", options: .regularExpression) == nil{
             result = .idFormat
             return result
         }
