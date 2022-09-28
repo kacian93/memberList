@@ -46,7 +46,6 @@ class JoinMemberDetailView: UIViewController{
     
     @IBAction func pushOkButton(_ sender: Any) {
         let member : Member = Member(emloyeeNumber: "01-11111111", kanjiName: "default", kanaName: "default", englishName: "default", gender: "male", password: signupMember.password, position: signupMember.position, affiliation: "第１チーム", email: signupMember.id, tel: "defualt", dateOfEmployee: Date.now, receivedMagazine: signupMember.megazine)
-        
         csvLoad.writeCsv(filename: "GngsMember", member: member)
         dismiss(animated: true)
     }

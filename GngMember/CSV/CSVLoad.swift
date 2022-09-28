@@ -20,24 +20,32 @@ class CSVLoad{
     /// - Parameter filename: ファイル名
     /// - Returns: ③番まで終わった[Member]
     func loadCSV(filename : String) -> [Member]{
-        let csvBundle = Bundle.main.path(forResource: filename, ofType: "csv")!
+        //        let csvBundle = Bundle.main.path(forResource: filename, ofType: "csv")!
+        guard let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        else {
+            fatalError("フォルダURL取得エラー")
+        }
+        
+        let fileURL = dirURL.appendingPathComponent("GngsMember.csv")
+        
         do{
-            let csvData = try String(contentsOfFile: csvBundle, encoding: String.Encoding.utf8)
-            var lineChange = csvData.replacingOccurrences(of: "\r", with: "\n")
-            csvStringArray = lineChange.components(separatedBy: "\n")
-            csvStringArray.removeLast()
+            let csvData  = try String(contentsOf: fileURL)
+            //            let csvData = try String(contentsOfFile: csvBundle, encoding: String.Encoding.utf8)
             
-            for lines in csvStringArray{
-                lineChange = lines.replacingOccurrences(of: "", with: ",")
+            let lineChange = csvData.replacingOccurrences(of: "\r", with: "\n")
+            csvStringArray = lineChange.components(separatedBy: "\n")
+            //            csvStringArray.removeLast()
+            //
+            for _ in csvStringArray{
                 let parts = lineChange.components(separatedBy: ",")
                 let member : Member =  Member(emloyeeNumber: parts[0], kanjiName: parts[1], kanaName: parts[2], englishName: parts[3], gender: parts[5], password: parts[8], position: parts[4],  affiliation: parts[6], email: parts[7],
-                    tel : parts[9],
-                    dateOfEmployee:  fromStringToDate(date: parts[10]))
+                                              tel : parts[9],
+                                              dateOfEmployee:  fromStringToDate(date: parts[10]))
                 csvMemberArray.append(member)
                 
             }
             
-            }catch{
+        }catch{
             print("csv error")
         }
         return csvMemberArray
@@ -45,63 +53,61 @@ class CSVLoad{
     
     
     func writeCsv(filename: String, member: Member) -> Void  {
-//        guard let filepath = Bundle.main.path(forResource: (filename), ofType: "csv") else { return }
-//        guard let file = FileHandle(forWritingAtPath: filepath) else{
-//            return
-//        }
-//
-//        let memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
-//
-//        let contentdata = memberInfomation.data(using: .utf8)
-//        do{
-//            try file.seekToEnd()
-//            file.write(contentdata!)
-//            file.closeFile()
-//        }catch{
-//            print("csv writing error")
-//        }
         guard let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                fatalError("フォルダURL取得エラー")
-            }
-            let fileURL = dirURL.appendingPathComponent("GngsMember.csv")
-        
-        
-                let memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
-            do {
+            fatalError("フォルダURL取得エラー")
+        }
+        let fileURL = dirURL.appendingPathComponent("GngsMember.csv")
+            
+            do{
+            var csvString : String = ""
+                if UIApplication.shared.canOpenURL(fileURL){
+                    print("UIApplication.shared.canOpenURL(fileURL) \(UIApplication.shared.canOpenURL(fileURL))")
+                var csvData  = try String(contentsOf: fileURL)
                 
-                try memberInfomation.write(to: fileURL, atomically: true, encoding: .utf8)
+                let lineChange = csvData.replacingOccurrences(of: "\r", with: "\n")
+                csvStringArray = lineChange.components(separatedBy: "\n")
                 
-            } catch {
-                print("failed to write: \(error)")
+                for item in csvStringArray {
+                csvString += item
             }
+        }
+        var memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))\n")
         
+        csvString.append(contentsOf: memberInfomation)
+        
+        print("csvStringArray : \(csvString)")
+        try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
+        
+    } catch {
+        print("failed to write: \(error)")
     }
-    /// 入社日がDate形式なのでStringをDate軽視に変わる関数
-    /// - Parameter date:　入社日のStringタイプ（CSVファイルがString）
-    /// - Returns:クラスのMemberの入社日はDateなのでDate
-    func fromStringToDate(date:String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        return dateFormatter.date(from: date) ?? Date()
-    }
+}
+/// 入社日がDate形式なのでStringをDate軽視に変わる関数
+/// - Parameter date:　入社日のStringタイプ（CSVファイルがString）
+/// - Returns:クラスのMemberの入社日はDateなのでDate
+func fromStringToDate(date:String) -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.calendar = Calendar(identifier: .gregorian)
+    dateFormatter.dateFormat = "yyyy/MM/dd"
+    return dateFormatter.date(from: date) ?? Date()
+}
+
+
+///　Date形をStringタイプで変換する関数
+/// - Parameter date: Date（Memberの入社日）
+/// - Returns: String
+func fromDatetoString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ja_JP")
+    dateFormatter.dateStyle = .medium
+    dateFormatter.dateFormat = "yyyy/MM/dd"
     
-    
-    ///　Date形をStringタイプで変換する関数
-    /// - Parameter date: Date（Memberの入社日）
-    /// - Returns: String
-    func fromDatetoString(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ja_JP")
-        dateFormatter.dateStyle = .medium
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-          
-        return dateFormatter.string(from: date)
-    }
-    
-    
-    
-    //CSVファイル保存メソッド
+    return dateFormatter.string(from: date)
+}
+
+
+
+//CSVファイル保存メソッド
 //    func saveCSV() {
 //
 //        //改行区切りで部活配列を連結する。

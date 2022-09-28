@@ -21,7 +21,7 @@ class Member : ObservableObject{
     var dateOfEmployee : Date
     var receivedMagazine : Bool
     
-    init(emloyeeNumber:String, kanjiName: String, kanaName:String , englishName: String, gender : String = "男" , password : String = "", position : String, affiliation : String,email : String, tel : String, dateOfEmployee: Date = Date.now, receivedMagazine: Bool = true) {
+    init(emloyeeNumber:String, kanjiName: String, kanaName:String , englishName: String, gender : String = "male" , password : String = "", position : String, affiliation : String, email : String, tel : String, dateOfEmployee: Date = Date.now, receivedMagazine: Bool = true) {
         self.employeeNumber = emloyeeNumber
         self.kanjiName = kanjiName
         self.kanaName = kanaName

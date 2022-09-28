@@ -393,7 +393,7 @@ class JoinMemberController : UIViewController{
         
         let text = idTextField.text!
         
-        if text.range(of: "[a-zA-Z0-9._%+-]+@[a-zA-Z]+.[a-zA-Z]{2,3}", options: .regularExpression) == nil{
+        if text.range(of: "^([\\w\\.\\_\\-])*[a-zA-Z0-9]+([\\w\\.\\_\\-])*([a-zA-Z0-9])+([\\w\\.\\_\\-])+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]{2,8}$", options: .regularExpression) == nil{
             result = .idFormat
             return result
         }
