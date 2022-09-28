@@ -377,7 +377,7 @@ class JoinMemberController : UIViewController{
     //エラーメッセージを表示
     func errorMessage(message:  String, view : UIView) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let idAlertAction : UIAlertAction = UIAlertAction(title: "直す", style: .default, handler: { _ in
+        let idAlertAction : UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
             view.becomeFirstResponder()
         })
         
