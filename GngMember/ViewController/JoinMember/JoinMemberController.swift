@@ -357,6 +357,8 @@ class JoinMemberController : UIViewController{
     
     //キーボードでreturnボタンを押せば次のTextfieldに移動する
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textField.tag \(textField.tag)")
+        
         let nextTag = textField.tag + 1
         
         if let nextResponder = textField.superview?.superview?.viewWithTag(nextTag) {
