@@ -12,7 +12,6 @@ class CSVLoad{
     @Published var csvMemberArray : [Member] = []
     var csvStringArray : [String] = []
     
-    
     /// CSVを読み込んで[Member]に入れる
     ///　①　CSVを読み込んで１ライン（\n基準で分ける）で[String]配列に一時的に保存
     ///　②　①番で宣言した[String]をコンマ基準で分けてMemberに入れる
@@ -64,6 +63,8 @@ class CSVLoad{
         
         let pathStr : String = String(urlStr.suffix(urlStr.count - 6))
         
+        var csvRow : Int = 1
+        
         do {
             var memberInfomation : String = ""
             var csvString : String = ""
@@ -76,8 +77,11 @@ class CSVLoad{
                 for item in csvStringArray {
                     csvString += ("\(item)\n")
                 }
+                
             }
-            memberInfomation.append("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
+            csvRow = csvStringArray.count > 0 ? csvStringArray.count : 1
+            let employNumber : String = "\(fromEmployDateToYear(date: member.dateOfEmployee))-\(String(format: "%08d", csvRow + 1))"
+            memberInfomation.append("\(employNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
                 
                 csvString.append(contentsOf: memberInfomation)
                 
@@ -116,7 +120,14 @@ class CSVLoad{
     }
     
     
-    
+    func fromEmployDateToYear(date: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja-JP")
+        dateFormatter.dateStyle = .medium
+        dateFormatter.dateFormat = "yy"
+        
+        return dateFormatter.string(from: date)
+    }
     //CSVファイル保存メソッド
     //    func saveCSV() {
     //

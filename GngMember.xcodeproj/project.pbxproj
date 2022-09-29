@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F2991CA28E5578A000F56CA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2991C928E5578A000F56CA /* LoginController.swift */; };
 		9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */; };
 		9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1628D051B7007931E7 /* SignupMember.swift */; };
 		9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCD28C58A3100F976FA /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F2991C928E5578A000F56CA /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberDetailView.swift; sourceTree = "<group>"; };
 		9F3C2D1628D051B7007931E7 /* SignupMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMember.swift; sourceTree = "<group>"; };
 		9F490BCA28C58A3100F976FA /* GngMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GngMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F2991C828E55775000F56CA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9F2991C928E5578A000F56CA /* LoginController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		9F490BC128C58A3100F976FA = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 		9F490BF228C5D7BE00F976FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9F2991C828E55775000F56CA /* Login */,
 				9F490BEE28C5B1A700F976FA /* TabBarController.swift */,
 				9F490BF928C89F9F00F976FA /* MemberList */,
 				9F490C0228C9AF7900F976FA /* DetailMember */,
@@ -224,6 +235,7 @@
 				9F490BE428C5996100F976FA /* CSVLoad.swift in Sources */,
 				9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */,
 				9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */,
+				9F2991CA28E5578A000F56CA /* LoginController.swift in Sources */,
 				9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */,
 				9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */,
 				9F490BD028C58A3100F976FA /* SceneDelegate.swift in Sources */,
