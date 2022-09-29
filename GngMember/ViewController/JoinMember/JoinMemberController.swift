@@ -169,6 +169,9 @@ class JoinMemberController : UIViewController{
         self.passwordTextField.delegate = self
         self.repasswordTextField.delegate = self
         self.positionTextField.delegate = self
+        self.kanjiTextField.delegate = self
+        self.kanaTextField.delegate = self
+        self.englishTextField.delegate  = self
         
         
         self.positionTextField.text = positionArray[0]
