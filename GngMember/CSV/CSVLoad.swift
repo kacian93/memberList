@@ -32,17 +32,19 @@ class CSVLoad{
             let csvData  = try String(contentsOf: fileURL)
             //            let csvData = try String(contentsOfFile: csvBundle, encoding: String.Encoding.utf8)
             
-            let lineChange = csvData.replacingOccurrences(of: "\r", with: "\n")
-            csvStringArray = lineChange.components(separatedBy: "\n")
+            csvStringArray = csvData.components(separatedBy: "\n")
+            
             //            csvStringArray.removeLast()
             //
-            for _ in csvStringArray{
-                let parts = lineChange.components(separatedBy: ",")
-                let member : Member =  Member(emloyeeNumber: parts[0], kanjiName: parts[1], kanaName: parts[2], englishName: parts[3], gender: parts[5], password: parts[8], position: parts[4],  affiliation: parts[6], email: parts[7],
+            for line in csvStringArray{
+                let parts = line.components(separatedBy: ",")
+                
+                
+                
+                let member : Member =  Member(emloyeeNumber: parts[0], kanjiName: parts[1], kanaName: parts[2], englishName: parts[3], gender: parts[4], password: parts[5], position: parts[6],  affiliation: parts[7], email: parts[8],
                                               tel : parts[9],
                                               dateOfEmployee:  fromStringToDate(date: parts[10]))
                 csvMemberArray.append(member)
-                
             }
             
         }catch{
@@ -58,30 +60,33 @@ class CSVLoad{
         url = url.appendingPathComponent("GngsMember.csv")
         print("url \(url)")
         
+        let urlStr : String = url.absoluteString
+        
+        let pathStr : String = String(urlStr.suffix(urlStr.count - 6))
+        
         do {
-            print("FileManager.default.fileExists \(FileManager.default.fileExists(atPath: url.absoluteString))")
-            if FileManager.default.fileExists(atPath: url.absoluteString) {
+            var memberInfomation : String = ""
+            var csvString : String = ""
+            if FileManager.default.fileExists(atPath: pathStr) {
                 
-                var csvString : String = ""
                 let csvData  = try String(contentsOf: url)
-                print("csvData \(csvData)")
                 
-                
-                let lineChange = csvData.replacingOccurrences(of: "\r", with: "\n")
-                csvStringArray = lineChange.components(separatedBy: "\n")
+                csvStringArray = csvData.components(separatedBy: "\n")
                 
                 for item in csvStringArray {
-                    csvString += item
+                    csvString += ("\(item)\n")
                 }
-                
-                let memberInfomation = ("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))\n")
+            }
+            memberInfomation.append("\(member.employeeNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
                 
                 csvString.append(contentsOf: memberInfomation)
                 
                 print("csvString : \(csvString)")
+                print("memberInfomation \(memberInfomation)")
                 try csvString.write(to: url, atomically: true, encoding: .utf8)
                 
-            }
+                memberInfomation = ""
+                csvString = ""
             
         } catch {
             print("failed to write: \(error)")

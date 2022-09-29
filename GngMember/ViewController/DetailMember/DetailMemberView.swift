@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSource{
-    
     var member : Member = Member(emloyeeNumber: "", kanjiName: "", kanaName: "", englishName: "", position: "", affiliation: "", email: "", tel: "")
-    var detailTitle : [String]  = ["社員番号", "名前（漢字）","名前（カナ）","名前（英語）","役職","所属","メール","電話番号", "入社日"]
+    var detailTitle : [String]  = ["社員番号", "名前（漢字）","名前（カナ）","名前（英語）","性別","役職","所属","メール","電話番号","入社日"]
     var amember : [String] = []
     @IBOutlet var memberInfoTitleLabel: UILabel!
     @IBOutlet var backButton: UIButton!
@@ -30,6 +29,7 @@ class DetailMemberView : UIViewController,UITableViewDelegate, UITableViewDataSo
         amember.append(member.kanjiName)
         amember.append(member.kanaName)
         amember.append(member.englishName)
+        amember.append(member.gender)
         amember.append(member.position)
         amember.append(member.affiliation)
         amember.append(member.email)

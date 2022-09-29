@@ -33,9 +33,6 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemGray6
-        csvMember = CSVLoad().loadCSV(filename: "GngsMember")
-        //TableCell.xibを登録
-        TableCell.register(to: tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -44,7 +41,14 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
         titlelabel()
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        csvMember = CSVLoad().loadCSV(filename: "GngsMember")
+        //TableCell.xibを登録
+        tableView.reloadData()
+        TableCell.register(to: tableView)
+    }
     //社員一覧のタイトル設定
     func titlelabel(){
         number.text = "社員番号"

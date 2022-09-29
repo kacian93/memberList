@@ -27,13 +27,13 @@ class Member : ObservableObject{
         self.kanaName = kanaName
         self.englishName = englishName
         self.gender = gender
-        self.password = password
         self.position = position
         self.affiliation = affiliation
         self.email = email
         self.tel = tel
         self.dateOfEmployee = dateOfEmployee
         self.receivedMagazine = receivedMagazine
+        self.password = password
     }
 }
 enum Position : String{
