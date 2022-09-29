@@ -20,8 +20,10 @@ class Member : ObservableObject{
     var tel :  String
     var dateOfEmployee : Date
     var receivedMagazine : Bool
+    var agreement : Bool = true
+    var memo : String = ""
     
-    init(emloyeeNumber:String, kanjiName: String, kanaName:String , englishName: String, gender : String = "male" , password : String = "", position : String, affiliation : String, email : String, tel : String, dateOfEmployee: Date = Date.now, receivedMagazine: Bool = true) {
+    init(emloyeeNumber:String, kanjiName: String, kanaName:String , englishName: String, gender : String = "male" , password : String = "", position : String, affiliation : String, email : String, tel : String, dateOfEmployee: Date = Date.now, receivedMagazine: Bool = true, agreement : Bool = true, memo : String = "") {
         self.employeeNumber = emloyeeNumber
         self.kanjiName = kanjiName
         self.kanaName = kanaName
@@ -34,6 +36,8 @@ class Member : ObservableObject{
         self.dateOfEmployee = dateOfEmployee
         self.receivedMagazine = receivedMagazine
         self.password = password
+        self.agreement = agreement
+        self.memo = memo
     }
 }
 enum Position : String{

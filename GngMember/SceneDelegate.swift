@@ -22,10 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if(lanchIsFIrstTme()){
-            window?.rootViewController = storyboard.instantiateViewController(identifier: "LoginController")
+            window?.rootViewController = storyboard.instantiateViewController(identifier: "TabBarController")
             firstLanch()
         }else{
-            window?.rootViewController = storyboard.instantiateViewController(identifier: "LoginController")
+            window?.rootViewController = storyboard.instantiateViewController(identifier: "TabBarController")
         }
         
         window?.makeKeyAndVisible()

@@ -79,14 +79,13 @@ class CSVLoad{
                 }
                 
             }
-            csvRow = csvStringArray.count > 0 ? csvStringArray.count : 1
+            csvRow = csvStringArray.count > 0 ? csvStringArray.count : 0
             let employNumber : String = "\(fromEmployDateToYear(date: member.dateOfEmployee))-\(String(format: "%08d", csvRow + 1))"
+            
             memberInfomation.append("\(employNumber),\(member.kanjiName),\(member.kanaName),\(member.englishName),\(member.gender),\(member.password),\(member.position),\(member.affiliation),\(member.email),\(member.tel),\(fromDatetoString(date: member.dateOfEmployee))")
                 
                 csvString.append(contentsOf: memberInfomation)
                 
-                print("csvString : \(csvString)")
-                print("memberInfomation \(memberInfomation)")
                 try csvString.write(to: url, atomically: true, encoding: .utf8)
                 
                 memberInfomation = ""

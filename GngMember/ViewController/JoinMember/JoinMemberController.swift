@@ -10,7 +10,7 @@ import UIKit
 class JoinMemberController : UIViewController{
     
     //MARK:  変数
-    var signupMember : SignupMember = SignupMember()
+    var signupMember : Member = Member(emloyeeNumber: "", kanjiName: "", kanaName: "", englishName: "", position: "", affiliation: "", email: "", tel: "")
     
     @IBOutlet var tableView: UITableView!
     
@@ -22,6 +22,9 @@ class JoinMemberController : UIViewController{
     @IBOutlet var idTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var repasswordTextField: UITextField!
+    @IBOutlet var kanjiTextField: UITextField!
+    @IBOutlet var kanaTextField: UITextField!
+    @IBOutlet var englishTextField: UITextField!
     
     //メールメガジン受信のswitch
     @IBOutlet var magazineSwitch: UISwitch!
@@ -81,7 +84,7 @@ class JoinMemberController : UIViewController{
         
         pickerView = UIPickerView()
         //        scrollView.flashScrollIndicators()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 730)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 1000)
         //        scrollView.contentOffset.y
         //性別ボタンの基本値
         
@@ -291,11 +294,6 @@ class JoinMemberController : UIViewController{
          height: self.innerView.frame.height
          )
          
-         if self.memoTextView.isFirstResponder {
-         // 一番下に移動
-         let y = self.innerView.frame.height - self.scrollView.frame.height + 20
-         self.scrollView.contentOffset = CGPoint(x: 0, y: y)
-         }
          
         
         
@@ -322,7 +320,7 @@ class JoinMemberController : UIViewController{
             let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
             self.scrollView.contentSize = CGSize(
                 width: self.scrollView.frame.width,
-                height: 750 + keyboardFrame
+                height: 1000 + keyboardFrame
             )
             
             if self.memoTextView.isFirstResponder {
@@ -343,7 +341,7 @@ class JoinMemberController : UIViewController{
             
             //case se3-元のサイズの戻る
             //iphone11ではスクロールビューが伸びる
-            height: 750
+            height: 1000
         )
         /*if self.view.frame.origin.y != 0 {
          self.view.frame.origin.y = 0
@@ -366,6 +364,7 @@ class JoinMemberController : UIViewController{
         } else {
             textField.resignFirstResponder()
         }
+        print("nextTag \(nextTag)")
         
         return true
     }
@@ -439,6 +438,40 @@ class JoinMemberController : UIViewController{
         return result
         
     }
+    
+    func kanjiValidation() -> ValidationResult{
+        var result : ValidationResult
+        if kanjiTextField.text!.isEmpty{
+            result = .kanjiEmpty
+            errorMessage(message: "名前（漢字）を入力してください。", view: kanjiTextField)
+        }else{
+            result = .kanjiOk
+        }
+        return result
+    }
+    
+    func kanaValidation() -> ValidationResult{
+        var result : ValidationResult
+        if kanaTextField.text!.isEmpty{
+            result = .kanaEmpty
+            errorMessage(message: "名前（カナ）を入力してください。", view: kanaTextField)
+        }else{
+            result = .kanjiOk
+        }
+        return result
+    }
+    
+    func englishValidation() -> ValidationResult{
+        var result : ValidationResult
+        if englishTextField.text!.isEmpty{
+            result = .englishEmpty
+            errorMessage(message: "名前（英語）を入力してください。", view: englishTextField)
+        }else{
+            result = .kanjiOk
+        }
+        return result
+    }
+    
     func passwordValidation() -> ValidationResult {
         let result  : ValidationResult = passwordcheck()
         if result == .passwordEmpty{
@@ -464,23 +497,24 @@ class JoinMemberController : UIViewController{
         return checkboxBool
     }
     @IBAction func joinMemberValidation(_ sender: Any) {
-        var validationResultBool : Bool = false
         //修正予定
         let idResult : ValidationResult = idValidation()
+        let kanjiResult : ValidationResult = kanjiValidation()
+        let kanaResult : ValidationResult = kanaValidation()
+        let englishResult = englishValidation()
         let passwordResult : ValidationResult  = passwordValidation()
         let checkboxBool : Bool = confirmcheckbox()
         
-        if idResult == .idOK, passwordResult == .passwordOK, checkboxBool{
-            validationResultBool = true
+        if idResult == .idOK, passwordResult == .passwordOK, checkboxBool, kanjiResult == .kanjiOk, kanaResult == .kanaOk , englishResult == .englishOk{
+            //Validation通過した後、メンバー変数に入れる
+            member = Member(emloyeeNumber: "", kanjiName: kanjiTextField.text!, kanaName: kanaTextField.text!, englishName: englishTextField.text!, gender: maleBool ? "male" : "female", password: passwordTextField.text!, position: positionTextField.text!, affiliation: "第１チーム", email: idTextField.text!, tel: "000-0000-0000", dateOfEmployee: Date.now, receivedMagazine: magazineSwitch.isOn ? true : false)
+            //ページ移動するため。下のprepareとセット
+            self.performSegue(withIdentifier: "joinMemberDetail", sender: member)
+
+        }else{
+            return
         }
         
-        if validationResultBool {
-            //Validation通過した後、メンバー変数に入れる
-            signupMember = SignupMember(id: idTextField.text!, password: passwordTextField.text!, gender: maleBool ? Gender.male : Gender.female, agreement: checkboxButton.isSelected, megazine: magazineSwitch.isSelected, memo: memoTextView.text!, position: positionTextField.text!)
-            //ページ移動するため。下のprepareとセット
-            self.performSegue(withIdentifier: "joinMemberDetail", sender: nil)
-        }else{
-        }
     }
     
     
@@ -490,7 +524,7 @@ class JoinMemberController : UIViewController{
                 fatalError("Failed to prepare DetailViewController.")
                 
             }
-            desti.signupMember = self.signupMember
+            desti.signupMember = self.member
         }
     }
     
@@ -612,5 +646,11 @@ enum ValidationResult {
     case repasswordMatch
     case idOK
     case passwordOK
+    case kanjiEmpty
+    case kanjiOk
+    case kanaEmpty
+    case kanaOk
+    case englishEmpty
+    case englishOk
     
 }

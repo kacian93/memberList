@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9F2991CA28E5578A000F56CA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2991C928E5578A000F56CA /* LoginController.swift */; };
 		9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */; };
-		9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C2D1628D051B7007931E7 /* SignupMember.swift */; };
 		9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCD28C58A3100F976FA /* AppDelegate.swift */; };
 		9F490BD028C58A3100F976FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BCF28C58A3100F976FA /* SceneDelegate.swift */; };
 		9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F490BD128C58A3100F976FA /* MemberListController.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		9F2991C928E5578A000F56CA /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMemberDetailView.swift; sourceTree = "<group>"; };
-		9F3C2D1628D051B7007931E7 /* SignupMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupMember.swift; sourceTree = "<group>"; };
 		9F490BCA28C58A3100F976FA /* GngMember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GngMember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F490BCD28C58A3100F976FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F490BCF28C58A3100F976FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			children = (
 				9F490BEC28C5A66200F976FA /* JoinMemberController.swift */,
 				9F3C2D1428CFE4A2007931E7 /* JoinMemberDetailView.swift */,
-				9F3C2D1628D051B7007931E7 /* SignupMember.swift */,
 			);
 			path = JoinMember;
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 			files = (
 				9F490BE428C5996100F976FA /* CSVLoad.swift in Sources */,
 				9F490BD228C58A3100F976FA /* MemberListController.swift in Sources */,
-				9F3C2D1728D051B7007931E7 /* SignupMember.swift in Sources */,
 				9F2991CA28E5578A000F56CA /* LoginController.swift in Sources */,
 				9F490BCE28C58A3100F976FA /* AppDelegate.swift in Sources */,
 				9F3C2D1528CFE4A2007931E7 /* JoinMemberDetailView.swift in Sources */,
