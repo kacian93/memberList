@@ -57,7 +57,6 @@ class CSVLoad{
         guard var url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else { return } // 検索するだけなので、createはfalse
         
         url = url.appendingPathComponent("GngsMember.csv")
-        print("url \(url)")
         
         let urlStr : String = url.absoluteString
         

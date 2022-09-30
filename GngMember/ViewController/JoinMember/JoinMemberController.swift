@@ -414,7 +414,7 @@ class JoinMemberController : UIViewController{
         }
         let text = passwordTextField.text!
         
-        if text.range(of: "^.*(?=^.{8,15}$)(?=.*[0-9])(?=.*[a-zA-Z]).*$", options: .regularExpression) == nil{
+        if text.range(of: "^.*(?=^.{8,15}$)(?=.*[0-9])(?=.*[A-Za-z]).*$", options: .regularExpression) == nil{
             result = .passwordFormat
             return result
         }
@@ -461,7 +461,7 @@ class JoinMemberController : UIViewController{
             result = .kanaEmpty
             errorMessage(message: "名前（カナ）を入力してください。", view: kanaTextField)
         }else{
-            result = .kanjiOk
+            result = .kanaOk
         }
         return result
     }
@@ -472,7 +472,8 @@ class JoinMemberController : UIViewController{
             result = .englishEmpty
             errorMessage(message: "名前（英語）を入力してください。", view: englishTextField)
         }else{
-            result = .kanjiOk
+            result = .englishOk
+            
         }
         return result
     }

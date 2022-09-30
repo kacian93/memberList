@@ -111,6 +111,7 @@ class MemberListController: UIViewController,UITableViewDelegate, UITableViewDat
     //cellを選択してとき、Segueを動く
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetailMember", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //segueの設定
